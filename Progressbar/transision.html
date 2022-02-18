@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            width: 100px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: lightblue;
+            padding: 3px;
+            border-radius: 3px;
+            box-shadow: inset 0px 30px rgba(91, 11, 196, 0.2);
+
+        }
+
+        .progress-bar-fill {
+            
+            display: block;
+            height: 20px;
+            background-color: blue;
+            border-radius: 3px;
+            
+            transition-property: width;
+            transition-duration: 4s;
+            transition-delay: 2s;
+
+            /* transform: scale(1.1); */
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Progressbars</h1>
+    <div class="wrapper">
+        <div class="progress-bar">
+            <span class="progress-bar-fill" style="width:10%"></span>
+        </div>
+    </div>
+        <div class="wrapper">
+            <div class="progress-bar">
+            <span class="progress-bar-fill" style="width:50%"></span>
+        </div>
+        </div>
+        <div class="wrapper">
+            <div class="progress-bar">
+            <span class="progress-bar-fill" style="width:100%"></span>
+            </div>
+        </div>
+    
+</body>
+
+</html>
