@@ -1,30 +1,36 @@
+import * as _ from 'lodash';
 
+import { register } from "./RegisterCustomElements";
+
+//Execute the program when the DOM is read and loaded
 window.addEventListener('load', (event) => {
     main();
 });
 
+//Main function 
 export function main() {
+    //Register custom HTML classes 
+    
     AddEventListener("sample", "click", listenerFunction);
     AddEventListener("up", "click", ListUpwards);
     AddEventListener("down", "click", ListDownwards);
     AddMouseEventListener("sample", "mousemove", onMouseMove);
-    ListItemsWithEventListener("card", "onmouseover", onMouseOver)
+    ListItemsWithEventListener("card", "onmouseover", onMouseOver);
+    register();
 }
 
-function ListItemsWithEventListener(className : string, eventType : string, 
-    callback: (EventListenerOrEventListenerObject) => void) : void {
-        const elements: HTMLCollectionOf<Element> = document.getElementsByClassName(className);
-        let array  = [...elements];
-        array.map(element => {element?.addEventListener(eventType, callback)});
-}  
-
+function ListItemsWithEventListener(className: string, eventType: string,
+    callback: (EventListenerOrEventListenerObject) => void): void {
+    const elements: HTMLCollectionOf<Element> = document.getElementsByClassName(className);
+    let array = [...elements];
+    array.map(element => { element?.addEventListener(eventType, callback) });
+}
 
 function AddEventListener(elementId: string, eventType: string,
     callback: (evt: Event) => void): void {
     const element: HTMLElement = document.getElementById(elementId);
     element?.addEventListener(eventType, callback);
 }
-
 
 function AddMouseEventListener(elementId: string, eventType: string,
     callback: (EventListenerOrEventListenerObject) => void): void {
