@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "./src/public/js/",
+        "module": "commonjs",
+        "target": "es2020",
+        "jsx": "preserve",
+        "strictFunctionTypes": true,
+        "sourceMap": true
+    },
+    
+    "include": ["src/ts/**/*.ts"],
+    "exclude": [
+        "node_modules",
+        "**/node_modules/*"
+    ]
+}

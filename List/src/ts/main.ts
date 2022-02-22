@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { register } from "./RegisterCustomElements";
+import { Register } from "./RegisterCustomElements";
 
 //Execute the program when the DOM is read and loaded
 window.addEventListener('load', (event) => {
@@ -11,12 +11,13 @@ window.addEventListener('load', (event) => {
 export function main() {
     //Register custom HTML classes 
     
+    Register();
+    
     AddEventListener("sample", "click", listenerFunction);
     AddEventListener("up", "click", ListUpwards);
     AddEventListener("down", "click", ListDownwards);
     AddMouseEventListener("sample", "mousemove", onMouseMove);
     ListItemsWithEventListener("card", "onmouseover", onMouseOver);
-    register();
 }
 
 function ListItemsWithEventListener(className: string, eventType: string,

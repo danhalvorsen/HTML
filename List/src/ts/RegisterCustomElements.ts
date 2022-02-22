@@ -1,5 +1,5 @@
 import { MyListItem } from "./MyListItem";
 
-export function register(): void {
-    window.customElements.define('app-drawer', MyListItem);
+export function Register(): void {
+    window.customElements.define('my-list-item', MyListItem);
 }
