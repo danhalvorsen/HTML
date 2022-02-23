@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "idb": "^7.0.0",
     "webpack": "^5.69.1"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.0",
+    "jest": "^27.5.1"
   }
 }
