@@ -1,4 +1,4 @@
-import { Sum } from "../src/ts/sum";
+import { Sum } from "../ts/sum";
 import {expect, jest, test, describe} from '@jest/globals';
 
 describe("This is a simple test", () => {

@@ -1,5 +1,10 @@
 # Installed 
 
+# Build
+tsc
+# Test
+npm test
+
 ## idb
 IndexedDB with usability.
 https://github.com/jakearchibald/idb
