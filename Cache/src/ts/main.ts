@@ -1,29 +1,18 @@
-import { openDB } from 'idb';
-import * as _ from 'lodash';
-import { MyIndexDB } from '../ts/ibd'
+import { openDB } from "idb";
+import * as _ from "lodash";
+import { Database } from "./Database";
 
 //Execute the program when the DOM is read and loaded
-window.addEventListener('load', (event) => {
-    main();
-   
+window.addEventListener("load", (event) => {
+  main();
 });
-
 
 const storeName: string = "my-test-pair";
 
 export async function main() {
-    console.info("Hi localdb");
+  var database = new Database();
 
+  await database.CreateDatabase();
+  await database.Add("key1", "Dan");
 
-    const dbPromise = await openDB('db1', 1, {
-        upgrade(dbPromise) {
-            dbPromise.createObjectStore("mystore");
-        }
-    });
-
-    const db1 = await openDB("db1", 1);
-    db1.add("mystore", "test", "key");
-    db1.close();
-   
-    
 }
