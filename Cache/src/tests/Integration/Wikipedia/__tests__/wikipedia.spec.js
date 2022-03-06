@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from "@jest/globals";
-import { driver } from "../driver-factory";
+import { driver } from "../../Common/driver-factory"
 import HomePage from "../__pageobjects__/homePage";
 import SeleniumPage from "../__pageobjects__/seleniumpage";
 
@@ -20,7 +20,7 @@ describe("Selenium wiki page", () => {
     await homePage.searchButton();
     expect(await seleniumPage.getHeadingText()).toEqual("Selenium (software)");
   });
-  
+
   test("contains the correct repository URL", async () => {
     expect(await seleniumPage.getRepositoryUrlText()).toEqual(
       "github.com/SeleniumHQ/"

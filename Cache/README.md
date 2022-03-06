@@ -53,3 +53,13 @@ https://medium.com/swlh/asynchronous-javascript-testing-with-selenium-and-jest-4
 npm install --save-dev jest
 npm install chromedriver
 npm install selenium-webdriver
+
+
+# Web Server 
+npm install -g local-web-server
+
+https://github.com/lwsjs/local-web-server/wiki/How-to-launch-a-development-web-server
+
+```
+ws --port 7500
+```

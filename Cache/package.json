@@ -18,6 +18,8 @@
     "webpack-cli": "^4.9.2"
   },
   "scripts": {
-    "test": "jest --config ./jest.config.json"
+    "test": "jest --config ./jest.config.json",
+    "ws": "ws --static.index home.html",
+    "build": "tsc && npx webpack"
   }
 }
