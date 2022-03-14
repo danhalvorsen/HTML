@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 export async function main() {
   document
     .getElementById("save")
-    .addEventListener("click", async (event: MouseEvent) => {
+    .addEventListener("click", async (event: Event) => {
       console.log("save pressed");
 
       //var key = document.getElementById("key").innerText;

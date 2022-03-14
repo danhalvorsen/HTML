@@ -1,7 +1,8 @@
 {
   "dependencies": {
-    "c": "^98.0.1",
+    "chromedriver": "^99.0.0",
     "idb": "^7.0.0",
+    "local-web-server": "^5.1.1",
     "selenium-webdriver": "^4.1.1",
     "webpack": "^5.69.1"
   },
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "test": "jest --config ./jest.config.json",
-    "ws": "ws --static.index home.html",
+    "ws": "ws --port 7500 index.html",
     "build": "tsc && npx webpack"
   }
 }
