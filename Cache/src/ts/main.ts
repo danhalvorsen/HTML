@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { Database } from "./Database";
+import { DatabaseKeyGenerator, Value } from "./DatabaseKeyGenerator";
 
 document.addEventListener("DOMContentLoaded", async function (event) {
   console.log("calling main()");
@@ -23,5 +24,9 @@ export async function main() {
       var database = new Database();
       await database.CreateDatabase();
       await database.Add(key, value);
+
+      var databaseKeyGenerator = new DatabaseKeyGenerator();
+      await databaseKeyGenerator.CreateDatabase();
+      await databaseKeyGenerator.Add(new Value())
     });
 }
