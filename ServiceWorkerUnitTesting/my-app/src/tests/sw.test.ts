@@ -9,6 +9,10 @@ import "service-worker-mock/fetch";
 
 const makeServiceWorkerEnv = require("service-worker-mock");
 
+const newLocal = "../../build/service-worker.js";
+//const newLocal = "./sw.js";
+//const service_worker : string = require("../../build/ser");
+
 describe("Service worker", () => {
   beforeEach(() => {
     const serviceWorkerEnv = makeServiceWorkerEnv();
@@ -22,10 +26,10 @@ describe("Service worker", () => {
   });
 
   it("should add listeners", async () => {
-    require("./sw");
+    require(newLocal);
     await self.trigger("install");
     // @ts-ignore
-    expect(self.listeners.get("install")).toBeDefined();
+    // expect(self.listeners.get("install")).toBeDefined();
     // @ts-ignore
     expect(self.listeners.get("activate")).toBeDefined();
     // @ts-ignore
@@ -33,7 +37,7 @@ describe("Service worker", () => {
   });
 
   it("should delete old caches on activate", async () => {
-    require("./sw");
+    require(newLocal);
 
     // Create old cache
     await self.caches.open("OLD_CACHE");
@@ -45,18 +49,19 @@ describe("Service worker", () => {
   });
 
   it("should return a cached response", async () => {
-   require("./sw");
+    require(newLocal);
    // @ts-ignore
    const cachedResponse : Response = { clone: () => { }, data: { key: 'value' } };
        
-    const cachedRequest: Request = new Request('/test', {})
+    const cachedRequest: Request = new Request('https://api/persons/12');
 
     const cache = await self.caches.open('TEST');
     cache.put(cachedRequest, cachedResponse);
   
     const response = await self.trigger('fetch', cachedRequest);
+    console.log(response);
     // @ts-ignore
-    expect(response.data.key).toEqual('value');
+    expect(response.data).toEqual('value');
   });
 
   it('should ignore the requests to external world', async () => {
@@ -64,7 +69,7 @@ describe("Service worker", () => {
    // @ts-ignore
    global.fetch = (response) => Promise.resolve({ ...mockResponse, headers: response.headers });
  
-   require("./sw");
+   require(newLocal);
  
    const request = new Request('http://google.com');
    const response = await self.trigger('fetch', request);
