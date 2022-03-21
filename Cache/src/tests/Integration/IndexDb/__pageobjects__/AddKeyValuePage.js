@@ -8,23 +8,23 @@ class AddKeyValuePage {
       }
 
     get keyInputLocator() {
-        return By.id("key").toString();
+        return By.id("key");
     }
 
     get valueInputLocator() {
-        return By.id("value").toString();
+        return By.id("value");
     }
 
-    set setValue(value :string) {
-        findElementBy(this.valueInputLocator).sendKeys(value);
+    setValue(value) {
+        findElementBy(this.valueInputLocator).setValue(value);
     }
 
-    ClickButton() : void {
+    ClickButton()  {
         findElementBy(this.searchButtonLocator).click();
     }
 
-    set setKey(value :string) {
-        findElementBy(this.keyInputLocator).sendKeys(value);
+    setKey(value) {
+        findElementBy(this.keyInputLocator).setValue(value);
     }
 }
 

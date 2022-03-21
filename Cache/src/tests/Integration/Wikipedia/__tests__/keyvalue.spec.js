@@ -5,7 +5,7 @@ import AddKeyValuePage from "../../IndexDb/__pageobjects__/AddKeyValuePage";
 let addKeyValuePage = new AddKeyValuePage();
 
 beforeAll(async () => {
-    await driver.navigate().to("http://127.0.0.1:5500/index.html");
+    await driver.navigate().to("http://172.28.240.1:5500");
   });
 
   afterAll(async () => {
