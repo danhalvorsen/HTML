@@ -55,6 +55,7 @@ export function register(config?: Config) {
       }
     });
   }
+  else console.error("Error");
 }
 
 function registerValidSW(swUrl: string, config?: Config) {

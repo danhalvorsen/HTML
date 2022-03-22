@@ -2,19 +2,21 @@ import { RouteHandler, RouteHandlerCallbackOptions, RouteMatchCallbackOptions } 
 
 export const matchFunction =  ({url, request, event } : RouteMatchCallbackOptions ) => {
     
-    if(url.href === 'https://api/persons/12')
+    if(url.origin === self.location.origin)
     {
-        return {
-          hashCode: hashCode(url.href),
-          test: 'testing'
-        
-        };
+      if(url.href === 'https://api/persons/12')
+          return {
+            hashCode: hashCode(url.href),
+            test: 'testing'
+          };
     }
   };
 
   export const handler : RouteHandler = async ({request, url, event, params } : RouteHandlerCallbackOptions) => {
+    return new Response(
+      'Testing'
+    );   
      
-    return new Response();
   };
 
   function hashCode(str: string): number {

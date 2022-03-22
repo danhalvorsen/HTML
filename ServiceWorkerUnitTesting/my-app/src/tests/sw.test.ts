@@ -53,15 +53,16 @@ describe("Service worker", () => {
    // @ts-ignore
    const cachedResponse : Response = { clone: () => { }, data: { key: 'value' } };
        
+    //const cachedRequest: Request  = new Request('https://api/persons/12');
     const cachedRequest: Request = new Request('https://api/persons/12');
 
-    const cache = await self.caches.open('TEST');
-    cache.put(cachedRequest, cachedResponse);
+    // const cache = await self.caches.open('TEST');
+    // cache.put(cachedRequest, cachedResponse);
   
-    const response = await self.trigger('fetch', cachedRequest);
-    console.log(response);
+    const response : Response = await self.trigger('fetch', cachedRequest);
+    
     // @ts-ignore
-    expect(response.data).toEqual('value');
+    expect(response).toEqual('value');
   });
 
   it('should ignore the requests to external world', async () => {
