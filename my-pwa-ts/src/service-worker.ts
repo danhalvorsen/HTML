@@ -8,13 +8,27 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-import { clientsClaim } from 'workbox-core';
+import { clientsClaim, RouteHandlerCallbackOptions, RouteMatchCallbackOptions } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
+
+//Boardcasting payload(data) between client and worker-service.js
+//https://felixgerschau.com/how-to-communicate-with-service-workers/
+let count = 0;
+const broadcast = new BroadcastChannel('count-channel');
+broadcast.onmessage = (event) => {
+  if (event.data && event.data.type === 'INCREASE_COUNT') {
+    console.log("Hey! Boardcast message from client!")
+    broadcast.postMessage({ payload: ++count });
+  }
+};
+
+
+
 
 clientsClaim();
 
@@ -68,6 +82,33 @@ registerRoute(
     ],
   })
 );
+
+
+
+registerRoute(
+  ({url}) => url.pathname.includes('api'), new CacheFirst({
+    cacheName: 'apis',
+    plugins: [
+      new ExpirationPlugin({ maxEntries: 50 }),
+    ]
+  })
+  );
+  
+  const matchCb = ({url, request, event} :RouteMatchCallbackOptions ) => {
+    return url.pathname === 'api/person';
+  };
+
+  const handlerCb = async ({url, request, event, params}:  RouteHandlerCallbackOptions) => {
+    const response = await fetch(request);
+    const responseBody = await response.text();
+    console.log("custom routing");
+    return new Response(`${responseBody} <!-- Look Ma. Added Content. -->`, {
+      headers: response.headers,
+    });
+  };
+
+  registerRoute(matchCb, handlerCb);
+
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
