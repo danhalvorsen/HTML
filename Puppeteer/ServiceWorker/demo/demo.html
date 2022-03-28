@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>woz | demo</title>
+    <link rel="stylesheet" href="/demo.css">
+  </head>
+
+  <body>
+    <h1>Demo - page: {{ type }}</h1>
+    <!-- We use this paragraph to test that our js file is able to manipulate the DOM: -->
+    <!-- We use this paragraph to test that our css file works as expected: -->
+    <p id="invisible">You can't see me.</p>
+  </body>
+  <script>
+    // Check browser supports Service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../serviceworkers/sw.js');
+    }
+  </script>
+  <script src="/demo.js"></script>
+</html>
