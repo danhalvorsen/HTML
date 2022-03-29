@@ -1,7 +1,7 @@
 describe('assets are served correctly by network', () => {
     // We navigate to our mock site before each test:
     beforeAll(async () => {
-        await page.goto('http://127.0.0.1:5500/demo/demo.html', { waitUntil: 'networkidle0' });
+        await page.goto('http://127.0.0.1:8080/demo.html', { waitUntil: 'networkidle0' });
     });
 
     // Using Puppeteer's page.evaluate() method, we can check whether our Service Worker was registered:
@@ -36,10 +36,11 @@ describe('assets are served correctly by network', () => {
         const sw = await page.evaluate(() => {
             if (navigator.serviceWorker) {
                 return navigator.serviceWorker.controller;
-            }
+            }     
         });
         expect(sw).toBeNull();
-    });
+        
+    }); 
 
     // We check whether demo.js and demo.css were served via the network
     it('js and css are served by network', async () => {
