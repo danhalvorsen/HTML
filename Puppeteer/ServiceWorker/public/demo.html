@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>WorkerService Under Test</title>
+  <link rel="stylesheet" href="/demo.css">
+
+  <script src="/sw.js"></script>
+
+</html>
+</head>
+
+<body>
+  <h1>Demo - page: {{ type }}</h1>
+  <!-- We use this paragraph to test that our js file is able to manipulate the DOM: -->
+  <p id="description">This demo site is designed to serve and test service worker.</p>
+  <!-- We use this paragraph to test that our css file works as expected: -->
+  <p id="invisible">You can't see me.</p>
+</body>
+<script>
+  // Check browser supports Service worker
+  console.log('Checking if Service worker in present in navigator');
+
+  window.registrationPromise = navigator.serviceWorker.register('/sw.js');
+  window.activationPromise = new Promise(resolve => navigator.serviceWorker.oncontrollerchange = resolve);
+
+
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register('./workers/sw-01.js').then(console.log("sw.js loaded")).catch((err) => console.logError(err));
+  // }
+  // else console.log("missing capabilities to load a service worker");
+</script>
+<script src="/demo.js"></script>
+<!-- <script src="/cleanup.js"></script> -->

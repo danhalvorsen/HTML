@@ -15,6 +15,7 @@ import { registerRoute } from 'workbox-routing';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
+declare const CACHE_ONLY = false;
 
 //Boardcasting payload(data) between client and worker-service.js
 //https://felixgerschau.com/how-to-communicate-with-service-workers/
@@ -84,16 +85,25 @@ registerRoute(
 );
 
 
+//#########################################################################################
 
-registerRoute(
-  ({url}) => url.pathname.includes('api'), new CacheFirst({
-    cacheName: 'apis',
-    plugins: [
-      new ExpirationPlugin({ maxEntries: 50 }),
-    ]
-  })
-  );
+
+if(CACHE_ONLY)
+{
+  registerRoute(
+    ({url}) => url.pathname.includes('api'), new CacheFirst({
+      cacheName: 'apis',
+      plugins: [
+        new ExpirationPlugin({ maxEntries: 50 }),
+      ]
+    })
+    );
   
+}
+//########################################################################################
+
+
+  //####################### CUSTOM ####################################################
   const matchCb = ({url, request, event} :RouteMatchCallbackOptions ) => {
     return url.pathname === 'api/person';
   };
@@ -108,7 +118,7 @@ registerRoute(
   };
 
   registerRoute(matchCb, handlerCb);
-
+//##########################################################################################
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
