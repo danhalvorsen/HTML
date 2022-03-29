@@ -22,7 +22,6 @@
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
     "@types/puppeteer": "^5.4.5",
-    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
     "jest-puppeteer": "^6.1.0",
     "webpack": "^5.70.0",

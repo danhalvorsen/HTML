@@ -25,10 +25,18 @@ function App() {
    });
  }
 
+ function sendApiPersonHttpCall()
+ {
+  axios.get("api/person/12")
+    .then((response) => {console.log(response)})
+    .catch((error) => {console.error(error);});
+ }
+
 
   return (
     <div className="App">
       <button onClick={handleBroadCastChannelClick}>Broadcast</button>
+      <button onClick={sendApiPersonHttpCall}>Send API/Person HttpCall</button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
