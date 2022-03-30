@@ -49,7 +49,7 @@ export const FakerCompletionStatus = (): string => {
 export const FakerPerson = (): Person => {
     return {
         id: FakerId(),
-        azureOid: faker.datatype.uuid.toString(),
+        azureOid: faker.datatype.uuid(),
         username: faker.name.findName(),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),

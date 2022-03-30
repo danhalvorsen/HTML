@@ -14,14 +14,17 @@ import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
+
+//Global variables 
 declare const self: ServiceWorkerGlobalScope;
-declare const CACHE_ONLY = false;
+let cacheOnlyState : boolean = false;
 
 //Boardcasting payload(data) between client and worker-service.js
 //https://felixgerschau.com/how-to-communicate-with-service-workers/
 let count = 0;
 const broadcast = new BroadcastChannel('count-channel');
 broadcast.onmessage = (event) => {
+  console.log("broadcast message revieved");
   if (event.data && event.data.type === 'INCREASE_COUNT') {
     console.log("Hey! Boardcast message from client!")
     broadcast.postMessage({ payload: ++count });
@@ -86,9 +89,7 @@ registerRoute(
 
 
 //#########################################################################################
-
-
-if(CACHE_ONLY)
+if(cacheOnlyState)
 {
   registerRoute(
     ({url}) => url.pathname.includes('api'), new CacheFirst({
@@ -105,13 +106,12 @@ if(CACHE_ONLY)
 
   //####################### CUSTOM ####################################################
   const matchCb = ({url, request, event} :RouteMatchCallbackOptions ) => {
-    return url.pathname === 'api/person';
-  };
+    return url.pathname.includes('api/person');}
 
   const handlerCb = async ({url, request, event, params}:  RouteHandlerCallbackOptions) => {
     const response = await fetch(request);
     const responseBody = await response.text();
-    console.log("custom routing");
+    console.log("custom routing: match on route 'api/person'");
     return new Response(`${responseBody} <!-- Look Ma. Added Content. -->`, {
       headers: response.headers,
     });
