@@ -4,7 +4,6 @@ import "./App.css";
 import axios from "axios";
 
 function App() {
-
   useEffect(() => {
     //Make a API cal so that we can verify that API is cached
     axios
@@ -35,14 +34,12 @@ function App() {
     try {
       const response = await axios.get("api/person/12");
       const data = await response.data;
-    console.log(response.status);
-    console.log(data);
-
-    }
-    catch (error) {
+      console.log(response.status);
+      console.log(data);
+    } catch (error) {
       console.error(error);
     }
-      }
+  };
 
   return (
     <div className="App">
