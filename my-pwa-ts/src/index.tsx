@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 
 // Mock Service Worker 
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser')
+  const { worker } = require('./mockRoutes/browser')
   console.log("Starting up the Mock Service Worker");
   worker.start()
 }

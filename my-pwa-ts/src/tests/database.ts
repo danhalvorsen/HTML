@@ -34,6 +34,7 @@ export class Database {
     dbPromise
       .get(storeName, key)
       .then((value) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         value.length > 0 ? true : false;
       })
       .catch((err) => {

@@ -1,4 +1,5 @@
 export class SoundPlayer {
+    foo: string;
     constructor() {
       this.foo = 'bar';
     }

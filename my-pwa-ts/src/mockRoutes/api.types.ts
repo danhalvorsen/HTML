@@ -1,4 +1,4 @@
-import { ResponseComposition } from "msw";
+import { ResponseComposition } from 'msw';
 
 export enum CompletionStatus {
     OS = 'OS',

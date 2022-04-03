@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { WoPreview } from './api.types';
-import { server } from './server';
+import { WoPreview } from '../../mockRoutes/api.types';
+import { server } from '../../mockRoutes/server';
 
 describe('/Workorder', () => {
 

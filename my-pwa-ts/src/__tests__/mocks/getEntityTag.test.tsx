@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { TagPreview } from './api.types';
-import { server } from './server';
+import { TagPreview } from '../../mockRoutes/api.types';
+import { server } from '../../mockRoutes/server';
 
 describe('/Tag', () => {
 

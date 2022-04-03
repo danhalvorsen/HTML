@@ -2,6 +2,10 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import Dexie from 'dexie';
+import { Person } from "./mockRoutes/api.types"
+import { AddFriendForm } from "./AddPersonForm";
+import ListPersons from "./ListPersons";
 
 function App() {
   useEffect(() => {
@@ -41,24 +45,31 @@ function App() {
     }
   };
 
+  const [counter, setCounter] = useState<number>(0)
   return (
     <div className="App">
+      <div>
+        <h1>Counter</h1>
+        <span id="counter">{counter}</span>
+        <button onClick={() => setCounter(counter + 1)}>+1</button>
+      </div>
+
       <button onClick={handleBroadCastChannelClick}>Broadcast</button>
       <button onClick={getPersonRequest}>Send API/Person HttpCall</button>
+      
+      <div id="something"></div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
+      <h2>Add Persons</h2>
+      <AddFriendForm defaultAge={21} />
+      <h2>List Persons</h2>
+      <ListPersons></ListPersons>
+      
     </div>
   );
 }

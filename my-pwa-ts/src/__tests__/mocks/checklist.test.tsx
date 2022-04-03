@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "./server";
+import { server } from "../../mockRoutes/server";
 
 beforeAll(() => server.listen());
 afterEach(() => {});

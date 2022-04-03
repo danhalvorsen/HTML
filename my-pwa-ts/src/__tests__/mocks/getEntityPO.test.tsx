@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { ChecklistPreview, PoPreview } from './api.types';
-import { server } from './server';
+import { ChecklistPreview, PoPreview } from '../../mockRoutes/api.types';
+import { server } from '../../mockRoutes/server'; 
 
 describe('/PurchaseOrder', () => {
 

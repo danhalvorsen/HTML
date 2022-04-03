@@ -1,7 +1,7 @@
-import { jest } from "@jest/globals";
-import { Database } from "./database";
+// import { jest } from "@jest/globals";
+import { Database } from "../../tests/database";
 import axios from "axios";
-import { Person } from "../mocks/api.types";
+// import { Person } from "../__tests__/mocks/api.types";
 
 
 describe("Insert data into database", () => {
@@ -20,7 +20,5 @@ describe("Insert data into database", () => {
     });
 
     expect(res.status).toBe(200);
-
-    
-  });
+  })
 });

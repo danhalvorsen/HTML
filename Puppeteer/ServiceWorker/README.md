@@ -11,4 +11,4 @@ npm install --save-dev @types/puppeteer
 
 
 # Links 
-https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/
+https://chromedevtoonls.github.io/devtools-protocol/tot/ServiceWorker/

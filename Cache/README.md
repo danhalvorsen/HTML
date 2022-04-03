@@ -2,16 +2,11 @@
 
 
 ## Very usefull link and samples 
-
-
-
 https://hackernoon.com/use-indexeddb-with-idb-a-1kb-library-that-makes-it-easy-8p1f3yqq
 
 https://codesandbox.io/s/v6mb2?file=/src/demos.js
 
 Note: Links complement each others
-
-
 
 # Webpack
 To install a web pack, run following command:
