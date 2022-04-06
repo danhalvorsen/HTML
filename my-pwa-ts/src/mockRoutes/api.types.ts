@@ -404,7 +404,7 @@ export interface IAdditionalTagField {
     type: string;
     unit: string;
 }
-export interface ITag {
+export interface ITag  {
     tag: ITagDetails;
     additionalFields: IAdditionalTagField[];
 }

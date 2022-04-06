@@ -11,17 +11,13 @@ export default class SomethingDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   mcPkgPreview!: Table<KeyMcPkgPreview>;
-  tagPreview!: Table<KeyTagPreview>;
-  tagDetails!: Table<KeyTagDetails>;
   tag!: Table<KeyTag>;
 
   constructor() {
     super('mcAppDatabase');
     this.version(1).stores({
       mcPkgPreview: 'id, mcPkgNo', // Primary key and indexed props
-      tagPreview: 'id, tagNo',
-      tagDetails: 'id, tagNo, commPkgNo, mcPkgNo, tagFunctionCode',
-      tag: 'tag'
+      tag: 'id, tagNo, commPkgNo, mcPkgNo',
     });
   }
 }

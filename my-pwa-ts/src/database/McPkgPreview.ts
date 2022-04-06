@@ -1,5 +1,5 @@
 import { IMcPkgPreview } from '../mockRoutes/api.types';
-import something, { KeyMcPkgPreview } from './something';
+import something, { KeyMcPkgPreview } from './mcAppDatabase';
 
 export class McPkgPreview implements KeyMcPkgPreview {
   id: number;
