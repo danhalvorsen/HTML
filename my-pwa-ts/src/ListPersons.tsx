@@ -2,7 +2,7 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import React from "react";
 import { db } from "./db";
-import { Person } from "./mockRoutes/api.types";
+import { IPerson } from "./mockRoutes/api.types";
 
 export default function ListPersons() {
 

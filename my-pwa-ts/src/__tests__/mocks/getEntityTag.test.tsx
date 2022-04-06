@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TagPreview } from '../../mockRoutes/api.types';
+import { ITagPreview } from '../../mockRoutes/api.types';
 import { server } from '../../mockRoutes/server';
 
 describe('/Tag', () => {
@@ -9,7 +9,7 @@ describe('/Tag', () => {
 
   // test/Login.test.js
   it('/Tag/Query ', async () => {
-    const res = await axios.get<TagPreview>('/Tag?plantId=PCS$$2000&tagId=1000');
+    const res = await axios.get<ITagPreview>('/Tag?plantId=PCS$$2000&tagId=1000');
     expect(res.status).toBe(200);
     expect(res.data).toHaveProperty('id');
     expect(res.data).toHaveProperty('tagNo');

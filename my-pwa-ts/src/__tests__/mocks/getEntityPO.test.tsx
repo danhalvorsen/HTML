@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChecklistPreview, PoPreview } from '../../mockRoutes/api.types';
+import { IChecklistPreview, IPoPreview } from '../../mockRoutes/api.types';
 import { server } from '../../mockRoutes/server'; 
 
 describe('/PurchaseOrder', () => {
@@ -8,7 +8,7 @@ describe('/PurchaseOrder', () => {
   afterAll(() => server.close())
   
   it('/PurchaseOrder - Should get payload accoring to queryparameters', async () => {
-    const res = await axios.get<PoPreview>('/PurchaseOrder?plantId=PCS$$2000&callOffId=1000');
+    const res = await axios.get<IPoPreview>('/PurchaseOrder?plantId=PCS$$2000&callOffId=1000');
     expect(res.status).toBe(200);
     expect(res.data).toHaveProperty('callOffId')
     expect(res.data).toHaveProperty('isPurchaseOrder');
@@ -24,7 +24,7 @@ describe('/PurchaseOrder/CheckLists', () => {
   afterAll(() => server.close())
 
   it('/PurchaseOrder/CheckLists/Query', async () =>{
-    const res = await axios.get<Array<ChecklistPreview>>('/PurchaseOrder/CheckLists?plantId=PCS$$2000&callOffId=1000');
+    const res = await axios.get<Array<IChecklistPreview>>('/PurchaseOrder/CheckLists?plantId=PCS$$2000&callOffId=1000');
     expect(res.data.length).toBe(5);
     expect(res.data[0]).toHaveProperty('id');
     expect(res.data[0]).toHaveProperty('tagId');

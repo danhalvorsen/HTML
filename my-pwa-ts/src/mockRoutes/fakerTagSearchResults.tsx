@@ -1,13 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { AdditionalTagField, ApiSavedSearchType, Attachment, Cell, CheckItem, ChecklistDetails, ChecklistPreview, ChecklistResponse, ChecklistSavedSearchResult, ColumnLabel, CommPkg, CompletionStatus, CustomCheckItem, LoopTag, McPkgPreview, MetaTable, NewPunch, Person, Plant, PoPreview, Project, PunchCategory, PunchItem, PunchItemSavedSearchResult, PunchOrganization, PunchPreview, PunchPriority, PunchSort, PunchType, Row, SavedSearch, SearchResults, Tag, TagDetails, TagPreview, WoPreview } from './api.types';
+import { IAdditionalTagField, ApiSavedSearchType, IAttachment, Cell, ICheckItem, IChecklistDetails, IChecklistPreview, IChecklistResponse, IChecklistSavedSearchResult, ColumnLabel, ICommPkg, CompletionStatus, ICustomCheckItem, LoopTag, IMcPkgPreview, MetaTable, INewPunch, IPerson, IPlant, IPoPreview, Project, IPunchCategory, IPunchItem, IPunchItemSavedSearchResult, IPunchOrganization, IPunchPreview, IPunchPriority, IPunchSort, IPunchType, Row, ISavedSearch, ISearchResults, ITag, ITagDetails, ITagPreview, IWoPreview } from './api.types';
 import { FakerTagPreview } from './faker';
 
-
-
 export const FakeSearchResults = (startsWithTagNo: string | null, projectId: string | null, 
-    plantId: string | null, maxAvailable : number) : SearchResults => {
+    plantId: string | null, maxAvailable : number) : ISearchResults => {
 
-    var fakeResults = new Array<TagPreview>();
+    var fakeResults = new Array<ITagPreview>();
     for(var i = 0; i < maxAvailable; i++) 
     {
         fakeResults.push(FakerTagPreview()); //ToDo: Improve the tag name syntax to be alined with the search params

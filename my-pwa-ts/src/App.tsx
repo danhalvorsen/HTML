@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
 import Dexie from 'dexie';
-import { Person } from "./mockRoutes/api.types"
+import { IPerson } from "./mockRoutes/api.types"
 import { AddFriendForm } from "./AddPersonForm";
 import ListPersons from "./ListPersons";
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { WoPreview } from '../../mockRoutes/api.types';
+import { IWoPreview } from '../../mockRoutes/api.types';
 import { server } from '../../mockRoutes/server';
 
 describe('/Workorder', () => {
@@ -9,7 +9,7 @@ describe('/Workorder', () => {
 
   // test/Login.test.js
   it('/Workorder/Query', async () => {
-    const res = await axios.get<WoPreview>('/WorkOrder?plantId=PCS$$2000&WorkOrderId=1000');
+    const res = await axios.get<IWoPreview>('/WorkOrder?plantId=PCS$$2000&WorkOrderId=1000');
     expect(res.status).toBe(200);
     expect(res.data).toHaveProperty('id');
     expect(res.data).toHaveProperty('workOrderNo');

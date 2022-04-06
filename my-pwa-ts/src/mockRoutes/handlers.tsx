@@ -5,7 +5,7 @@ import {
     RestContext,
     RestRequest,
 } from "msw";
-import { ChecklistPreview, PoPreview } from "./api.types";
+import { IChecklistPreview, IPoPreview } from "./api.types";
 import {
     FakerChecklistPreview,
     FakePunchPreviewList,
@@ -35,7 +35,7 @@ export const handlers = [
     rest.get("McPkg/CheckLists",
         (
             req: RestRequest<DefaultRequestBody>,
-            res: ResponseComposition<ResponseComposition | ChecklistPreview>,
+            res: ResponseComposition<ResponseComposition | IChecklistPreview>,
             ctx: RestContext
         ) => {
             return res(ctx.json(FakerChecklistPreview()));
@@ -61,7 +61,7 @@ export const handlers = [
     rest.get("/PurchaseOrder",
         (
             req: RestRequest<DefaultRequestBody>,
-            res: ResponseComposition<ResponseComposition | PoPreview>,
+            res: ResponseComposition<ResponseComposition | IPoPreview>,
             ctx: RestContext
         ) => {
             return res(ctx.json(FakerPoPreview()));
@@ -71,7 +71,7 @@ export const handlers = [
         "/PurchaseOrder/CheckLists",
         (
             req: RestRequest<DefaultRequestBody>,
-            res: ResponseComposition<ResponseComposition | Array<ChecklistPreview>>,
+            res: ResponseComposition<ResponseComposition | Array<IChecklistPreview>>,
             ctx: RestContext
         ) => {
             return res(ctx.json(FakerListChecklistPreview(5)));

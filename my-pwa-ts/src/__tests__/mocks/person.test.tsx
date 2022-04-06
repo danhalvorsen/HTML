@@ -1,5 +1,4 @@
 import axios from 'axios';
-//import { server } from '../../mockRoutes/server';
 import { server } from '../../mockRoutes/server';
 
 describe('API/Person/', () => {

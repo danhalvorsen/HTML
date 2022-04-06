@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { McPkgPreview, TagPreview } from '../../mockRoutes/api.types';
+import { IMcPkgPreview, ITagPreview } from '../../mockRoutes/api.types';
 import { server } from '../../mockRoutes/server';
 
 describe('McPkg test suite', () => {
@@ -9,7 +9,7 @@ describe('McPkg test suite', () => {
 
   // test/Login.test.js
   it('get McPkg package', async () => {
-    var request = await axios.get<McPkgPreview>('/McPkg?plantId=PCS$$2000&mcPkgId=1000');
+    var request = await axios.get<IMcPkgPreview>('/McPkg?plantId=PCS$$2000&mcPkgId=1000');
     const response = request;
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty('id');

@@ -13,7 +13,7 @@ export type Project = {
     title: string;
 };
 
-export interface Plant {
+export interface IPlant {
     id: string;
     title: string;
     slug: string;
@@ -27,14 +27,14 @@ export enum ApiSavedSearchType {
     PUNCH = 'Punch List Items',
 }
 
-export interface SavedSearch {
+export interface ISavedSearch {
     id: number;
     name: string;
     description: string;
     type: ApiSavedSearchType;
 }
 
-export interface McPkgPreview {
+export interface IMcPkgPreview {
     id: number;
     mcPkgNo: string;
     description: string;
@@ -48,7 +48,7 @@ export interface McPkgPreview {
     operationHandoverStatus: string;
 }
 
-export interface WoPreview {
+export interface IWoPreview {
     id: number;
     workOrderNo: string;
     title: string;
@@ -57,7 +57,7 @@ export interface WoPreview {
     disciplineDescription: string;
 }
 
-export interface TagPreview {
+export interface ITagPreview {
     id: number;
     tagNo: string;
     description: string;
@@ -70,7 +70,7 @@ export interface TagPreview {
     mccrResponsibleCode: string;
 }
 
-export interface PoPreview {
+export interface IPoPreview {
     callOffId: number;
     isPurchaseOrder: boolean;
     title: string;
@@ -78,12 +78,12 @@ export interface PoPreview {
     responsibleCode: string;
 }
 
-export interface SearchResults {
+export interface ISearchResults {
     maxAvailable: number;
-    items: McPkgPreview[] | WoPreview[] | TagPreview[] | PoPreview[];
+    items: IMcPkgPreview[] | IWoPreview[] | ITagPreview[] | IPoPreview[];
 }
 
-export interface ChecklistSavedSearchResult {
+export interface IChecklistSavedSearchResult {
     id: number;
     tagNo: string;
     tagDescription: string;
@@ -102,7 +102,7 @@ export interface ChecklistSavedSearchResult {
     updatedByLastName: string;
 }
 
-export interface PunchItemSavedSearchResult {
+export interface IPunchItemSavedSearchResult {
     id: number;
     status: CompletionStatus;
     description: string;
@@ -118,7 +118,7 @@ export interface PunchItemSavedSearchResult {
 
 // COMM PKG AND LISTS
 
-export interface CommPkg {
+export interface ICommPkg {
     id: number;
     commPkgNo: string;
     description: string;
@@ -132,7 +132,7 @@ export interface CommPkg {
     systemId: number;
 }
 
-export interface ChecklistPreview 
+export interface IChecklistPreview 
 {
     id: number;
     tagId: number;
@@ -151,7 +151,7 @@ export interface ChecklistPreview
     isVerified: boolean;
 }
 
-export interface PunchPreview {
+export interface IPunchPreview {
     id: number;
     status: CompletionStatus;
     description: string;
@@ -171,7 +171,7 @@ export interface PunchPreview {
 }
 
 // CHECKLIST
-export interface ChecklistDetails {
+export interface IChecklistDetails {
     id: number;
     tagNo: string;
     tagDescription: string;
@@ -224,7 +224,7 @@ export interface MetaTable {
     rows: Row[];
 }
 
-export interface CheckItem {
+export interface ICheckItem {
     id: number;
     sequenceNumber: string;
     text: string;
@@ -243,54 +243,54 @@ export interface LoopTag {
     tagNo: string;
 }
 
-export interface CustomCheckItem {
+export interface ICustomCheckItem {
     id: number;
     itemNo: string;
     text: string;
     isOk: boolean;
 }
 
-export interface ChecklistResponse {
+export interface IChecklistResponse {
     loopTags: LoopTag[];
-    checkList: ChecklistDetails;
-    checkItems: CheckItem[];
-    customCheckItems: CustomCheckItem[];
+    checkList: IChecklistDetails;
+    checkItems: ICheckItem[];
+    customCheckItems: ICustomCheckItem[];
 }
 
-export interface PunchCategory {
+export interface IPunchCategory {
     id: number;
     code: CompletionStatus;
     description: string;
 }
 
-export interface PunchType {
+export interface IPunchType {
     id: number;
     parentId: number;
     code: string;
     description: string;
 }
 
-export interface PunchOrganization {
+export interface IPunchOrganization {
     id: number;
     parentId: number;
     code: string;
     description: string;
 }
 
-export interface PunchSort {
+export interface IPunchSort {
     id: number;
     parentId: number;
     code: string;
     description: string;
 }
 
-export interface PunchPriority {
+export interface IPunchPriority {
     id: number;
     code: string;
     description: string;
 }
 
-export interface NewPunch {
+export interface INewPunch {
     CheckListId: number;
     CategoryId: number;
     Description: string;
@@ -305,7 +305,7 @@ export interface NewPunch {
     TemporaryFileIds: string[];
 }
 
-export interface PunchItem {
+export interface IPunchItem {
     id: number;
     checklistId: number;
     formularType: string;
@@ -352,7 +352,7 @@ export interface PunchItem {
     attachmentCount: number;
 }
 
-export interface Attachment {
+export interface IAttachment {
     id: number;
     uri: string;
     title: string;
@@ -364,7 +364,7 @@ export interface Attachment {
     fileName: string;
 }
 
-export interface TagDetails {
+export interface ITagDetails {
     id: number;
     tagNo: string;
     description: string;
@@ -397,19 +397,19 @@ export interface TagDetails {
     preservationMigrated: boolean;
 }
 
-export interface AdditionalTagField {
+export interface IAdditionalTagField {
     id: number;
     label: string;
     value: string;
     type: string;
     unit: string;
 }
-export interface Tag {
-    tag: TagDetails;
-    additionalFields: AdditionalTagField[];
+export interface ITag {
+    tag: ITagDetails;
+    additionalFields: IAdditionalTagField[];
 }
 
-export interface Person {
+export interface IPerson {
     id: number;
     azureOid: string;
     username: string;
