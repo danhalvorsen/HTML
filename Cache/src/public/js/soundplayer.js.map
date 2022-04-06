@@ -1,0 +1,1 @@
+{"version":3,"file":"soundplayer.js","sourceRoot":"","sources":["../../ts/soundplayer.ts"],"names":[],"mappings":";;;AAAA,MAAa,WAAW;IAEpB;QACE,IAAI,CAAC,GAAG,GAAG,KAAK,CAAC;IACnB,CAAC;IAED,aAAa,CAAC,QAAQ;QACpB,OAAO,CAAC,GAAG,CAAC,qBAAqB,GAAG,QAAQ,CAAC,CAAC;IAChD,CAAC;CACF;AATH,kCASG"}

@@ -9,7 +9,7 @@ Explore
 microsoft
 /
 TypeScript-Node-Starter
-Public
+
 Code
 Issues
 53
@@ -64,9 +64,6 @@ bower_components
 # OS metadata
 .DS_Store
 Thumbs.db
-
-# Ignore built ts files
-public/js/**/*
 
 # ignore yarn.lock
 yarn.lock

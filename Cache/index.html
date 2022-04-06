@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="./css/list.css">
+    <!-- <link rel="stylesheet" href="./css/list.css"> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +10,16 @@
 
 </head>
 
+<script src="src/public/js/bundle.js">
+    //Super tricks for getting export in typescript start working.
+    var exports = {};
+</script>
+
 <body>
-    <script>
-        //Super tricks for getting export in typescript start working.
-        var exports = {};
-    </script>
-    <script src="public/js/bundle.js"></script>
+    <h1>Testing ground for indexDB operations</h1>
+    <label>Key:</label> <input id="key" type="text" value="100"></input>
+    <label>Value:</label> <input id="value" type="text" value="200"></input>
+    <label>Submit:</labe> <Button id="save">Save</Button>
 </body>
 
 </html>
