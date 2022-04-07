@@ -1,6 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import { IMcPkgPreview, ITagDetails, IAdditionalTagField  } from '../mockRoutes/api.types';
-import Tag, { KeyTag } from './Tag';
+import TagIndex  from './TagIndex';
 
 /* ---- Optimized index objects for database ---- */
 // export type KeyMcPkgPreview = Pick<IMcPkgPreview, 'id'| 'mcPkgNo'>;
@@ -11,7 +10,7 @@ export default class SomethingDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   // mcPkgPreview!: Table<KeyMcPkgPreview>;
-  tag!: Table<Tag>;
+  tag!:Table<TagIndex>;
 
   constructor() {
     super('mcAppDatabase');
