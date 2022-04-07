@@ -1,18 +1,24 @@
 import { faker } from '@faker-js/faker';
 import { IAdditionalTagField, ApiSavedSearchType, IAttachment, Cell, ICheckItem, IChecklistDetails, IChecklistPreview, IChecklistResponse, IChecklistSavedSearchResult, ColumnLabel, ICommPkg, CompletionStatus, ICustomCheckItem, LoopTag, IMcPkgPreview, MetaTable, INewPunch, IPerson, IPlant, IPoPreview, Project, IPunchCategory, IPunchItem, IPunchItemSavedSearchResult, IPunchOrganization, IPunchPreview, IPunchPriority, IPunchSort, IPunchType, Row, ISavedSearch, ITag, ITagDetails, ITagPreview, IWoPreview } from './api.types';
+import { CheckItems, CommissioningHandoverStatus, OperationHandoverStatus, PhaseCodes, ResponsibleCodes, StatusCodes } from './fakerDataLists';
+import FakerRandomEnum from './fakerRandomEnum';
 import { FakerSyntax } from './fakerSyntax';
 
-//https://www.angularfix.com/2022/03/how-to-get-random-enum-in-typescript.html
-function randomEnum<T>(anEnum: T): T[keyof T] {
-    const enumValues = Object.keys(anEnum)
-        .map(n => n)
-        .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][]
-    const randomIndex = Math.floor(Math.random() * enumValues.length)
-    const randomEnumValue = enumValues[randomIndex]
-    return randomEnumValue;
-}
 
-const TagSyntax : string = "XXX-AA-XXXX-A-A-XX";
+
+export const TagSyntax : string = "XXX-AA-XXXX-A-A-XX";
+/**
+ * One Alpha: [a-zA-Z]{1} 
+ * Two Alpha: [a-zA-Z]{2} 
+ * 'n' Alpha: [a-zA-Z]{n} 
+ * 
+ * One number: [0-9]{1}
+ * Two number: [0-9]{2}
+ * 'n' number: [0-9]{n}
+ */
+export const TagSyntaxRegex : RegExp = new RegExp('^[0-9]{3}-[a-zA-Z]{2}-[0-9]{4}-[a-zA-Z]{1}-[a-zA-Z]{1}-[0-9]{2}');
+export const PurchaseOrderNo : string = "XXX-XXX-AA-X"
+
 const TagFunctionCodeSyntax : string = "XXX-AAA-XXX"
 const SystemCodeSyntax : string = "XXX-XXX-XXX";
 
@@ -21,7 +27,7 @@ export const FakerTitle = (): string => faker.lorem.paragraph(1);
 export const FakerDescription = (): string => faker.lorem.paragraph(3);
 export const FakerRandomBoolean = (): boolean => { return Math.random() > 0.50 ? true : false; }
 export const FakerCommPkgNo = (count: number) => FakerAlphaCode(count);
-export const FakerPurchaseOrderNo = (count: number) => FakerAlphaCode(count);
+export const FakerPurchaseOrderNo = (count: number) => FakerSyntax(PurchaseOrderNo);
 export const FakerMcPkgNo = (count: number) => FakerAlphaCode(count);
 export const FakerCallOffNo = (count: number) => FakerAlphaCode(count);
 export const FakerDisciplineCode = (count: number) => FakerAlphaCode(count);
@@ -41,11 +47,6 @@ export const FakerFormularGroup = (count: number) => FakerAlphaCode(count);
 export const FakerSequenceNumber = () => faker.datatype.number({ min: 1, max: 99999999 });
 export const FakerItemNo = (count: number) => FakerAlphaCode(count);
 export const FakerTypeId = () => faker.datatype.number({ min: 1, max: 99999999 });
-export const FakerCompletionStatus = (): string => {
-    let options = new Array<string>();
-    options.concat("Status A", "Status B", "Status C", "Status D", "Status E");
-    return options[Math.floor(Math.random() * options.length)];
-};
 
 export const FakerPerson = (): IPerson => {
     return {
@@ -58,13 +59,13 @@ export const FakerPerson = (): IPerson => {
     }
 }
 
-const generateTagNumber = (): string => {
-    let subnumber1 = faker.datatype.number({ min: 100, max: 300 });
-    let subnumber2 = faker.datatype.number({ min: 500, max: 700 });
-    let subnumber3 = faker.datatype.number({ min: 800, max: 999 });
+// const generateTagNumber = (): string => {
+//     let subnumber1 = faker.datatype.number({ min: 100, max: 300 });
+//     let subnumber2 = faker.datatype.number({ min: 500, max: 700 });
+//     let subnumber3 = faker.datatype.number({ min: 800, max: 999 });
 
-    return `${subnumber1} +'-' ${subnumber2} +'-' ${subnumber3}`;
-}
+//     return `${subnumber1} +'-' ${subnumber2} +'-' ${subnumber3}`;
+// }
 
 export const FakerSavedSearch = (type: ApiSavedSearchType): ISavedSearch => {
     return {
@@ -74,50 +75,19 @@ export const FakerSavedSearch = (type: ApiSavedSearchType): ISavedSearch => {
         type: type,
     }
 };
-
-const PhaseCodes = (): Array<string> => {
-    let options = new Array<string>();
-    return options.concat(["PhaseCode A", "PhaseCode B", "PhaseCode C", "PhaseCode D", "PhaseCode E"]);
-};
-
-const ResponsibleCodes = (): Array<string> => {
-    let options = new Array<string>();
-    return options.concat(["ResponsibleCode A", "ResponsibleCode B", "ResponsibleCode C", "ResponsibleCode D", "ResponsibleCode E"]);
-};
-
-const CommissioningHandoverStatues = (): Array<string> => {
-    let options = new Array<string>();
-    return options.concat(["CommissioningHandoverStatus A", "CommissioningHandoverStatus B", "CommissioningHandoverStatus C", "CommissioningHandoverStatus D", "CommissioningHandoverStatus E"]);
-};
-
-const OperationHandoverStatues = (): Array<string> => {
-    let options = new Array<string>();
-    return options.concat(["OperationHandoverStatus A", "OperationHandoverStatus B", "OperationHandoverStatus C", "OperationHandoverStatus D", "OperationHandoverStatus E"]);
-};
-
-const CompletionStatues = (): Array<string> => {
-    let options = new Array<string>();
-    return options.concat(["CompletionStatus A", "CompletionStatus B", "CompletionStatus C", "CompletionStatus D", "CompletionStatus E"]);
-};
-
-
-export const FakerPickInRandomList = (options: Array<string>) => {
-    return options[Math.floor(Math.random() * options.length)];
-};
-
 export const FakerMcPkgPreview = (id : number) : IMcPkgPreview  => {
     return {
         id: id,
         mcPkgNo: FakerMcPkgNo(5),
         description: FakerDescription(),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         commPkgNo: FakerCommPkgNo(5),
-        phaseCode: FakerPickInRandomList(PhaseCodes()),
+        phaseCode: PickRandomFromList(PhaseCodes()),
         phaseDescription: FakerDescription(),
-        responsibleCode: FakerPickInRandomList(ResponsibleCodes()),
+        responsibleCode: PickRandomFromList(ResponsibleCodes()),
         responsibleDescription: FakerDescription(),
-        commissioningHandoverStatus: FakerPickInRandomList(CommissioningHandoverStatues()),
-        operationHandoverStatus: FakerPickInRandomList(OperationHandoverStatues())
+        commissioningHandoverStatus: PickRandomFromList(CommissioningHandoverStatus()),
+        operationHandoverStatus: PickRandomFromList(OperationHandoverStatus())
     }
 };
 
@@ -139,7 +109,7 @@ export const FakerTagPreview = (): ITagPreview => {
         tagNo: FakerTagNo(5),
         description: FakerDescription(),
         registerCode: FakerRegisterCode(),
-        tagFunctionCode: FakerTagFunctionCode(5),
+        tagFunctionCode: FakerTagFunctionCode(),
         commPkgNo: FakerCommPkgNo(5),
         mcPkgNo: FakerMcPkgNo(5),
         callOffNo: FakerCallOffNo(5),
@@ -164,7 +134,7 @@ export const FakerChecklistSavedSearchResult = (): IChecklistSavedSearchResult =
         tagNo: FakerTagNo(5),
         tagDescription: FakerDescription(),
         responsibleCode: FakerResponsibleCode(5),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         projectDescription: FakerDescription(),
         formularType: FakerAlphaCode(10),
         formularGroup: FakerAlphaCode(4),
@@ -184,7 +154,7 @@ export const FakerFormularType = (count: number) => FakerAlphaCode(count);
 export const FakerPunchItemSavedSearchResult = (): IPunchItemSavedSearchResult => {
     return {
         id: FakerId(),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         description: FakerDescription(),
         tagNo: FakerTagNo(5),
         tagId: FakerTagId(),
@@ -203,13 +173,13 @@ export const FakeCommPkg = (): ICommPkg => {
         id: FakerId(),
         commPkgNo: FakerCommPkgNo(5),
         description: FakerDescription(),
-        commStatus: randomEnum(CompletionStatus),
-        mcStatus: randomEnum(CompletionStatus),
+        commStatus: FakerRandomEnum(CompletionStatus),
+        mcStatus: FakerRandomEnum(CompletionStatus),
         mcPkgCount: 100,
         mcPkgsAcceptedByCommissioning: 100,
         mcPkgsAcceptedByOperation: 200,
-        commissioningHandoverStatus: FakerPickInRandomList(CommissioningHandoverStatues()),
-        operationHandoverStatus: FakerPickInRandomList(OperationHandoverStatues()),
+        commissioningHandoverStatus: PickRandomFromList(CommissioningHandoverStatus()),
+        operationHandoverStatus: PickRandomFromList(OperationHandoverStatus()),
         systemId: FakerSystemId(5)
     };
 };
@@ -222,7 +192,7 @@ export const FakerChecklistPreview = (): IChecklistPreview => {
         tagNo: FakerTagNo(5),
         tagDescription: FakerDescription(),
         responsibleCode: FakerResponsibleCode(5),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         formularType: FakerFormularType(10),
         formularGroup: FakerFormularType(4),
         sheetNo: 100,
@@ -246,7 +216,7 @@ export const FakerListChecklistPreview = (count : number): Array<IChecklistPrevi
 export const FakePunchPreview = (): IPunchPreview => {
     return {
         id: FakerId(),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         description: FakerDescription(),
         systemModule: FakerSystemModule(5),
         tagDescription: FakerDescription(),
@@ -306,22 +276,8 @@ export const FakeRow = (): Row => {
     }
 }
 
-function Rows(): Array<Row> {
-    let options = new Array<Row>();
-    options.push(FakeRow());
-    options.push(FakeRow());
-    options.push(FakeRow());
-    return options;
-}
 
 
-function ColumnLabels(): Array<ColumnLabel> {
-    let options = new Array<ColumnLabel>();
-    options.push(FakerColumnLabel());
-    options.push(FakerColumnLabel());
-    options.push(FakerColumnLabel());
-    return options;
-}
 
 export const FakeMetaTable = (): MetaTable => {
     return {
@@ -348,12 +304,7 @@ export const FakerCheckItem = (): ICheckItem => {
     }
 }
 
-function CheckItems(count: number): Array<ICheckItem> {
-    let options = new Array<ICheckItem>();
-    for (var i = 0; i < count; i++)
-        options.push(FakerCheckItem());
-    return options;
-}
+
 
 export const FakerLoopTag = (): LoopTag => {
 
@@ -400,7 +351,7 @@ export const FakerChecklistResponse = (id : number): IChecklistResponse => {
 export const FakerPunchCategory = (): IPunchCategory => {
     return {
         id: FakerId(),
-        code: randomEnum(CompletionStatus),
+        code: FakerRandomEnum(CompletionStatus),
         description: FakerTitle()
     }
 }
@@ -483,16 +434,12 @@ const PriorityCodes = (): Array<string> => {
     return options.concat(["PriorityCode A", "PriorityCode B", "PriorityCode C", "PriorityCode D"]);
 };
 
-
-
-
-
 export const FakerPunchItem = (): IPunchItem => {
     return {
         id: FakerId(),
         checklistId: FakerId(),
         formularType: FakerFormularType(10),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         description: FakerDescription(),
         typeCode: FakerTypeCode(),
         typeDescription: FakerDescription(),
@@ -515,7 +462,7 @@ export const FakerPunchItem = (): IPunchItem => {
         dueDate: new Date(2022, 1, 1).toDateString(),
         estimate: 100,
         priorityId: FakerPriorityId(),
-        priorityCode: FakerPickInRandomList(PriorityCodes()),
+        priorityCode: PickRandomFromList(PriorityCodes()),
         priorityDescription: FakerDescription(),
         actionByPerson: FakerId(),
         actionByPersonFirstName: faker.name.firstName(),
@@ -560,7 +507,7 @@ export const FakeChecklistDetails = (id : number): IChecklistDetails => {
         mcPkgNo: FakerMcPkgNo(5),
         responsibleCode: FakerResponsibleCode(5),
         responsibleDescription: FakerDescription(),
-        status: randomEnum(CompletionStatus),
+        status: FakerRandomEnum(CompletionStatus),
         systemModule: FakerSystemModule(5),
         formularType: FakerFormularType(10),
         formularGroup: FakerFormularGroup(5),
@@ -611,38 +558,26 @@ export const FakerProject = (): Project => {
 
 
 export const FakerRegisterCode = () => { return faker.random.alphaNumeric(10) };
-export const FakerAlphaCode = (count: number) => { return faker.random.alphaNumeric(count) };
+export const FakerAlphaCode = (count: number) => { return faker.random.alpha(count) };
 
-export const StatusCodes = (): Array<string> => {
-    let list = new Array<string>();
-    list.concat(["A", "B", "C", "D"]);
-    return list;
+
+//Generic random picker in different lists 
+export const PickRandomFromList = <T,>(list: Array<T>): T => {
+    let index = randomIntFromInterval(0, list.length - 1);
+    return list[index];
 };
 
-export const RandomStatusCode = (): string => {
-    return StatusCodes()[Math.floor(Math.random() * StatusCodes().length)];
-}
-
-export const tagFunctionCode = (): Array<string> => {
-    let list = new Array<string>();
-    list.concat(["AA", "BB", "CC", "DD"]);
-    return list;
-};
-
-export const RandomFunctionCode = (): string => {
-    return StatusCodes()[Math.floor(Math.random() * StatusCodes().length)];
-}
 
 export const FakerTagDetails = (): ITagDetails => {
     return {
         id: FakerId(),
-        tagNo: generateTagNumber(),
+        tagNo: FakerSyntax(TagSyntax),
         description: FakerDescription(),
         registerCode: FakerAlphaCode(10),
         registerDescription: FakerDescription(),
-        statusCode: RandomStatusCode(),
+        statusCode: PickRandomFromList(StatusCodes()),
         statusDescription: FakerDescription(),
-        tagFunctionCode: RandomStatusCode(),
+        tagFunctionCode: PickRandomFromList(StatusCodes()),
         tagFunctionDescription: FakerDescription(),
         commPkgNo: FakerCommPkgNo(5),
         mcPkgNo: FakerMcPkgNo(5),
@@ -651,7 +586,7 @@ export const FakerTagDetails = (): ITagDetails => {
         purchaseOrderTitle: FakerTitle(),
         projectDescription: FakerDescription(),
         sequence: faker.datatype.number.toString(),
-        mountedOnTagNo: generateTagNumber(),
+        mountedOnTagNo: FakerSyntax(TagSyntax),
         remark: FakerTitle(),
         systemCode: FakerSystemCode(5),
         systemDescription: FakerDescription(),
@@ -677,10 +612,10 @@ export const FakerAdditionalTagField = (): IAdditionalTagField => {
 
     return {
         id: FakerId(),
-        label: FakerPickInRandomList(labels),
-        value: FakerPickInRandomList(values),
-        type: FakerPickInRandomList(types),
-        unit: FakerPickInRandomList(units)
+        label: PickRandomFromList(labels),
+        value: PickRandomFromList(values),
+        type: PickRandomFromList(types),
+        unit: PickRandomFromList(units)
     }
 }
 
@@ -698,3 +633,15 @@ export const FakerTag = (): ITag => {
         additionalFields: AdditionalTagFields(faker.datatype.number({ min: 0, max: 10 }))
     }
 }
+
+function randomIntFromInterval(min : number, max : number) : number { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+function ColumnLabels(): ColumnLabel[] {
+    throw new Error('Function not implemented.');
+}
+
+function Rows(): Row[] {
+    throw new Error('Function not implemented.');
+}
+

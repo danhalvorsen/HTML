@@ -1,7 +1,6 @@
 import {FindSubPatterns } from '../../../mockRoutes/findSubPatterns'
 import {FakerSyntax} from '../../../mockRoutes/fakerSyntax'
 
-
 describe('discover sub patterns in string', () => {
     it('one Pattern in XX', () => {
         let result = FindSubPatterns("XX");
@@ -35,9 +34,10 @@ describe('discover sub patterns in string', () => {
         let result = FindSubPatterns("AXA");
         expect(result.length).toBe(3);
     })
-    it('four patterns in AXAX', () => {
+    it('should discover four patterns in AXAX', () => {
         let result = FindSubPatterns("AXAX");
         expect(result.length).toBe(4);
+        
     })
 })
 
@@ -46,13 +46,14 @@ describe('generate a syntax for a given string pattern', () => {
         var pattern = "XX-XX";
         var fake = FakerSyntax(pattern)
         expect(fake.length).toBe(pattern.length);
+        expect(fake).toMatch(new RegExp('[0-9]{2}-[0-9]{2}'));
     });
 
     it('should give two random numbers with separated by a dash when XXX-XXX is given', () => {
         var pattern = "XXX-XXX";
         var fake = FakerSyntax(pattern)
         expect(fake.length).toBe(pattern.length);
-        // expect(fake).toBe("123-123");
+        expect(fake).toMatch(new RegExp('[0-9]{3}-[0-9]{3}'));
     });
 
     it('should give one random number with an alpha-numeric chars when XXX-A is given', () => {
@@ -60,7 +61,7 @@ describe('generate a syntax for a given string pattern', () => {
         var fake = FakerSyntax(pattern)
         console.log(fake);
         expect(fake.length).toBe(pattern.length);
-        // expect(fake).toBe("123-123");
+        expect(fake).toMatch(new RegExp('^[0-9]{3}-[a-zA-Z]{1}'));
     });
 
     it('should give two random numbers with separated by a dash when XXX-A is given', () => {
@@ -68,6 +69,6 @@ describe('generate a syntax for a given string pattern', () => {
         var fake = FakerSyntax(pattern)
         console.log(fake);
         expect(fake.length).toBe(pattern.length);
-        // expect(fake).toBe("123-123");
+        expect(fake).toMatch(new RegExp('^[a-zA-Z]{1}-[a-zA-Z]{1}-[a-zA-Z]{2}'));
     });
 })

@@ -17,7 +17,7 @@ import {
     FakerWoPreview,
     FakerListChecklistPreview,
 } from "./faker";
-import {FakeSearchResults } from "./fakerTagSearchResults";
+import { FakeSearchResults } from "./fakerTagSearchResults";
 
 export const handlers = [
     rest.get("api/person/:id", (req, res, ctx) => {
@@ -55,7 +55,7 @@ export const handlers = [
         const maxAvailable = 100;
 
         return res(ctx.json(FakeSearchResults(startsWithTagNo, projectId, plantId, maxAvailable)));
-        
+
 
     }),
     rest.get("/PurchaseOrder",
