@@ -1,8 +1,4 @@
-import {
-  ITagDetails,
-  IAdditionalTagField,
-  ITag,
-} from "../mockRoutes/api.types";
+import { ITagDetails, IAdditionalTagField, ITag } from "../mockRoutes/api.types";
 
 type KeyTag = Pick<ITagDetails, "id" | "tagNo" | "commPkgNo" | "mcPkgNo"> & {
   additionalFields: Pick<IAdditionalTagField, "id" | "label">[];

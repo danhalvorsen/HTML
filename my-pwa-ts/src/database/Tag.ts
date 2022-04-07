@@ -1,12 +1,7 @@
 /************* Domain object ****************************************/
 
 import { inherits } from "util";
-
-import {
-  IAdditionalTagField,
-  ITag,
-  ITagDetails,
-} from "../mockRoutes/api.types";
+import { IAdditionalTagField, ITag, ITagDetails } from "../mockRoutes/api.types";
 import { db } from "./mcAppDatabase";
 import TagIndex from "./TagIndex";
 
@@ -26,10 +21,6 @@ export class Tag extends TagIndex implements ITag {
   }
   log() {
     console.log(JSON.stringify(this));
-  }
-
-  insert(): boolean {
-    return true;
   }
 
   async query(id: number): Promise<Array<TagIndex>> {
