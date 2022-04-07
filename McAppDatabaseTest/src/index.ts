@@ -27,8 +27,8 @@ const testingTag = new TagTesting();
 await testingTag.clean(console).then(() => console.log("Database deleted"));
 var tagSource = FakerTag();
 await testingTag.persistTag(tagSource);
-var queryedTags = await testingTag.queryTag(tagSource.tag.id);
-console.log(`QueryResult:${queryedTags.length} Id:${queryedTags[0].id}`);
+var queriedTags = await testingTag.queryTag(tagSource.tag.id);
+console.log(`QueryResult:${queriedTags.length} Id:${queriedTags[0].id}`);
 console.log("==================\n");
 
 
