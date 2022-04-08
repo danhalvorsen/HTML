@@ -1,6 +1,6 @@
 # Integration testing of Dixie database integration
 
-The "folder" is move out from the "unstable" CRA (my-pwa-ts) due to conflicks with test runners, web packing etc
+The "folder" is move out from the "unstable" CRA (my-pwa-ts) due to conflicts with test runners, web packing etc
 
 
 ## Links and inspiration
