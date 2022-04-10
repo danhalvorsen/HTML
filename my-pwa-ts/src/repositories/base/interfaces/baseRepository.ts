@@ -1,29 +1,62 @@
 import { IWrite } from '../interfaces/IWrite';
 import { IRead } from '../interfaces/IRead';
 
-import Dexie, { Table } from 'dexie';
-
+import { IndexableType, Table } from 'dexie';
+import { db } from '../../../database/mcAppDatabase';
+import { TagIndexes } from '../../../database/TagIndex';
 
 // that class only can be extended
-export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
+export abstract class BaseRepository<T extends TagIndexes> implements IWrite<T>, IRead<T> {
 
     //creating a property to use your code in all instances 
     // that extends your base repository and reuse on methods of class
-    public readonly _collection: Array<T>;
+    public _table?: Table<any, IndexableType>  | undefined;
 
-    create(item: T): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    constructor(table : Table<any, IndexableType> |  undefined) {
+        this._table = table;
+      }
+
+    async create(item: T): Promise<boolean> {
+        
+        //await db.tag.add(item).then((result) => {
+            await this._table?.add(item).then((result) => {
+            console.log(`Adding item:${item} to database`);
+            return true; }).catch((error) => {
+
+                console.log(error);
+                return false;
+            });
+        
+            return true;
     }
-    update(id: string, item: T): Promise<boolean> {
-        throw new Error("Method not implemented.");
+
+    async update(id: string, item: T): Promise<boolean> {
+        this._table?.put(id, item).then((result) =>{
+            return true;
+        });
+
+        return false;
     }
-    delete(id: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async delete(id: string): Promise<boolean> {
+        this._table?.delete(id).then((result) =>{
+            return true;
+        });
+
+        return false;
     }
-    find(item: T): Promise<T[]> {
-        throw new Error("Method not implemented.");
+
+    async find(item: T): Promise<T[]> {
+    var result = new Array<T>();
+    await this._table?.where("id").equals(item).each((item) => {
+        result.push(item);
+    });
+    return result;
     }
-    findOne(id: string): Promise<T> {
-        throw new Error("Method not implemented.");
+    
+    async findOne(id: number): Promise<T> {
+        
+        let result =  await this._table?.where("id").equals(id).first();
+        console.log(result);
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 import Dexie, { Table } from 'dexie';
-import TagIndex  from './TagIndex';
+import { TagIndexes } from './TagIndex';
+// import TagIndex  from './TagIndex';
 
 /* ---- Optimized index objects for database ---- */
 // export type KeyMcPkgPreview = Pick<IMcPkgPreview, 'id'| 'mcPkgNo'>;
@@ -10,7 +11,7 @@ export default class SomethingDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   // mcPkgPreview!: Table<KeyMcPkgPreview>;
-  tag!:Table<TagIndex>;
+  tag!:Table<TagIndexes>;
 
   constructor() {
     super('mcAppDatabase');

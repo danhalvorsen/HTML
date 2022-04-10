@@ -1,3 +1,4 @@
+import { IndexableType } from 'dexie';
 import { ResponseComposition } from 'msw';
 
 export enum CompletionStatus {
@@ -408,6 +409,8 @@ export interface ITag  {
     tag: ITagDetails;
     additionalFields: IAdditionalTagField[];
 }
+
+ 
 
 
 
