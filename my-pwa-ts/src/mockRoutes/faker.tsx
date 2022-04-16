@@ -630,7 +630,7 @@ function AdditionalTagFields(count: number): Array<IAdditionalTagField> {
 export const FakerTag = (): ITag => {
     return {
         tag: FakerTagDetails(),
-        additionalFields: AdditionalTagFields(faker.datatype.number({ min: 0, max: 10 }))
+        additionalFields: AdditionalTagFields(faker.datatype.number({ min: 0, max: 20 }))
     }
 }
 

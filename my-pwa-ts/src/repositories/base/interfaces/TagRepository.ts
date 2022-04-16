@@ -3,6 +3,7 @@ import { db } from '../../../database/mcAppDatabase';
 import { BaseRepository } from "./baseRepository";
 
 
+
 export class TagRepository extends BaseRepository<TagIndexes>{
 
     constructor() {

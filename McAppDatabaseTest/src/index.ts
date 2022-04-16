@@ -1,24 +1,17 @@
-import { IndexableType } from 'dexie';
 import * as _ from 'lodash';
 import { Console } from "./console";
 var equal = require('deep-equal');
-
 import { FakerTag } from '../../my-pwa-ts/src/mockRoutes/faker';
-import { Tag } from '../../my-pwa-ts/src/database/tag';
 import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
 import { TagIndexes } from '../../my-pwa-ts/src/database/TagIndex';
 import {db } from '../../my-pwa-ts/src/database/mcAppDatabase';
 import { ITag } from '../../my-pwa-ts/src/mockRoutes/api.types';
 
-
- 
 db.open().catch(function (err) {
     console.error('Failed to open db: ' + (err.stack || err));
 });
 
-
 const fakeTag = FakerTag();
-
 const appDiv: HTMLElement = document.getElementById("app") as HTMLElement;
 
 // ===================================
@@ -48,17 +41,17 @@ if(!db.isOpen())
     
 console.log("====================================================================\n");
 
-var respository = new TagRepository();
+var repository = new TagRepository();
 var obj = createTagIndexes(fakeTag);
-await respository.create(obj);
+await repository.create(obj);
 
 var obj = createTagIndexes(fakeTag);
-await respository.create(obj);
+await repository.create(obj);
 
 var obj = createTagIndexes(fakeTag);
-await respository.create(obj);
+await repository.create(obj);
 
-var lookupTag = await respository.findOne(fakeTag.tag.id);
+var lookupTag = await repository.findOne(fakeTag.tag.id);
 console.log(`The deep test fails due to different objects: ${equal(lookupTag, fakeTag.tag)}`);
 
 console.log(`FakeTag:${fakeTag}`);
@@ -75,12 +68,8 @@ function createTagIndexes(fakeData : ITag) : TagIndexes {
         tagNo: fakeTag.tag.tagNo,
         commPkgNo: fakeTag.tag.commPkgNo,
         mcPkgNo: fakeTag.tag.mcPkgNo,
-        additionalFields: [
-            {id: 1, label: 'lll'},
-            {id: 2, label: 'lll'},
-    
-        ]
-    } as IndexableType ;
+        additionalFields: fakeTag.additionalFields
+    };
 
     return obj;
 }

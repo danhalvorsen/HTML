@@ -3,10 +3,10 @@ import { IRead } from '../interfaces/IRead';
 
 import { IndexableType, Table } from 'dexie';
 import { db } from '../../../database/mcAppDatabase';
-import { TagIndexes } from '../../../database/TagIndex';
+import { Index, TagIndexes } from '../../../database/TagIndex';
 
 // that class only can be extended
-export abstract class BaseRepository<T extends TagIndexes> implements IWrite<T>, IRead<T> {
+export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
 
     //creating a property to use your code in all instances 
     // that extends your base repository and reuse on methods of class
@@ -31,7 +31,8 @@ export abstract class BaseRepository<T extends TagIndexes> implements IWrite<T>,
     }
 
     async update(id: string, item: T): Promise<boolean> {
-        this._table?.put(id, item).then((result) =>{
+        const i = item as unknown as IndexableType;
+        this._table?.put(id, i).then((result) =>{
             return true;
         });
 
@@ -47,7 +48,8 @@ export abstract class BaseRepository<T extends TagIndexes> implements IWrite<T>,
 
     async find(item: T): Promise<T[]> {
     var result = new Array<T>();
-    await this._table?.where("id").equals(item).each((item) => {
+    const i = item as unknown as IndexableType;
+    await this._table?.where("id").equals(i).each((item) => {
         result.push(item);
     });
     return result;
