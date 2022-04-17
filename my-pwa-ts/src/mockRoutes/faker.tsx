@@ -23,6 +23,15 @@ const TagFunctionCodeSyntax : string = "XXX-AAA-XXX"
 const SystemCodeSyntax : string = "XXX-XXX-XXX";
 
 export const FakerId = (): number => faker.datatype.number({ min: 1, max: 999999999 });
+
+export const FakerIdWithIdCheck = (reservedIds : ReservedIds): number => {
+    
+    var id =  FakerId();
+    while(reservedIds.ids?.includes(id)) {
+        id =  FakerId();
+    }
+    return id;
+}
 export const FakerTitle = (): string => faker.lorem.paragraph(1);
 export const FakerDescription = (): string => faker.lorem.paragraph(3);
 export const FakerRandomBoolean = (): boolean => { return Math.random() > 0.50 ? true : false; }
@@ -58,14 +67,6 @@ export const FakerPerson = (): IPerson => {
         email: faker.internet.email()
     }
 }
-
-// const generateTagNumber = (): string => {
-//     let subnumber1 = faker.datatype.number({ min: 100, max: 300 });
-//     let subnumber2 = faker.datatype.number({ min: 500, max: 700 });
-//     let subnumber3 = faker.datatype.number({ min: 800, max: 999 });
-
-//     return `${subnumber1} +'-' ${subnumber2} +'-' ${subnumber3}`;
-// }
 
 export const FakerSavedSearch = (type: ApiSavedSearchType): ISavedSearch => {
     return {
@@ -567,6 +568,41 @@ export const PickRandomFromList = <T,>(list: Array<T>): T => {
     return list[index];
 };
 
+export const FakerTagDetailsWithIdCheck = (fn: ReservedIds): ITagDetails => {
+    return {
+        id: FakerIdWithIdCheck(fn),
+        tagNo: FakerSyntax(TagSyntax),
+        description: FakerDescription(),
+        registerCode: FakerAlphaCode(10),
+        registerDescription: FakerDescription(),
+        statusCode: PickRandomFromList(StatusCodes()),
+        statusDescription: FakerDescription(),
+        tagFunctionCode: PickRandomFromList(StatusCodes()),
+        tagFunctionDescription: FakerDescription(),
+        commPkgNo: FakerCommPkgNo(5),
+        mcPkgNo: FakerMcPkgNo(5),
+        purchaseOrderNo: FakerPurchaseOrderNo(5),
+        callOffNo: FakerCallOffNo(5),
+        purchaseOrderTitle: FakerTitle(),
+        projectDescription: FakerDescription(),
+        sequence: faker.datatype.number.toString(),
+        mountedOnTagNo: FakerSyntax(TagSyntax),
+        remark: FakerTitle(),
+        systemCode: FakerSystemCode(5),
+        systemDescription: FakerDescription(),
+        disciplineCode: FakerDisciplineCode(5),
+        disciplineDescription: FakerDescription(),
+        areaCode: FakerAreaCode(5),
+        areaDescription: FakerDescription(),
+        engineeringCodeCode: FakerEngineeringCodeCode(5),
+        engineeringCodeDescription: FakerDescription(),
+        contractorCode: FakerContractorCode(5),
+        contractorDescription: FakerDescription(),
+        hasPreservation: FakerRandomBoolean(),
+        preservationMigrated: FakerRandomBoolean()
+    }
+}
+
 
 export const FakerTagDetails = (): ITagDetails => {
     return {
@@ -625,6 +661,18 @@ function AdditionalTagFields(count: number): Array<IAdditionalTagField> {
     for (var i = 0; i < count; i++)
         options.push(FakerAdditionalTagField());
     return options;
+}
+
+export type ReservedIds = {
+    ids : number[] 
+    | undefined
+};
+
+export const FakerTagWithIdCheck = (fn:ReservedIds): ITag => {
+    return {
+        tag: fn === undefined ? FakerTagDetails() : FakerTagDetailsWithIdCheck(fn),
+        additionalFields: AdditionalTagFields(faker.datatype.number({ min: 0, max: 20 }))
+    }
 }
 
 export const FakerTag = (): ITag => {

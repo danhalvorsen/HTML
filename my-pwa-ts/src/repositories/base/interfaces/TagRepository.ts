@@ -6,9 +6,11 @@ import { BaseRepository } from "./baseRepository";
 
 export class TagRepository extends BaseRepository<TagIndexes>{
 
+    private readonly tableName = "tag";
+
     constructor() {
         
-        var table  = db.tables.find(t=>t.name === "tag");
+        var table  = db.tables.find(t=>t.name === this.tableName);
         console.log(`Database:${db.name} is: ${db.isOpen() ? "open" : "closed"}`);
         console.log(`TagRepository giving dixie table:${table} to baseRepository`);
         super(table);

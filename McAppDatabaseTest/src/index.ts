@@ -1,7 +1,8 @@
+import { ReservedIds } from './../../my-pwa-ts/src/mockRoutes/faker';
 import * as _ from 'lodash';
 import { Console } from "./console";
 var equal = require('deep-equal');
-import { FakerTag } from '../../my-pwa-ts/src/mockRoutes/faker';
+import { FakerTag, FakerTagWithIdCheck } from '../../my-pwa-ts/src/mockRoutes/faker';
 import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
 import { TagIndexes } from '../../my-pwa-ts/src/database/TagIndex';
 import {db } from '../../my-pwa-ts/src/database/mcAppDatabase';
@@ -11,7 +12,7 @@ db.open().catch(function (err) {
     console.error('Failed to open db: ' + (err.stack || err));
 });
 
-const fakeTag = FakerTag();
+
 const appDiv: HTMLElement = document.getElementById("app") as HTMLElement;
 
 // ===================================
@@ -42,19 +43,22 @@ if(!db.isOpen())
 console.log("====================================================================\n");
 
 var repository = new TagRepository();
-var obj = createTagIndexes(fakeTag);
-await repository.create(obj);
 
-var obj = createTagIndexes(fakeTag);
-await repository.create(obj);
+let rr = await repository.getUsedIds();
+const r : ReservedIds = {
+    ids: rr,
+};
 
-var obj = createTagIndexes(fakeTag);
-await repository.create(obj);
+const fakeTag = FakerTagWithIdCheck(r);
+var obj1 = createTagIndexes(fakeTag);
+await repository.create(obj1);
 
-var lookupTag = await repository.findOne(fakeTag.tag.id);
+ 
+
+const lookupTag = await repository.findOne(fakeTag.tag.id);
 console.log(`The deep test fails due to different objects: ${equal(lookupTag, fakeTag.tag)}`);
 
-console.log(`FakeTag:${fakeTag}`);
+console.log(`FakeTag:${JSON.stringify(fakeTag)}`);
 // const castedTag = lookupTag[0] as Tag;
 // console.log(`The test was: ${castedTag.equals(fakeTag)}`);
 console.log("====================================================================\n");
