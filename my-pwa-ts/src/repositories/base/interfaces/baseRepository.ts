@@ -2,9 +2,8 @@ import { IWrite } from "../interfaces/IWrite";
 import { IRead } from "../interfaces/IRead";
 
 import { IndexableType, Table } from "dexie";
-
-// that class only can be extended
-export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
+import { DomainObject } from "../../../database/DomainObject";
+export abstract class BaseRepository<S, T extends DomainObject<S>> implements IWrite<S>, IRead<S> {
   //creating a property to use your code in all instances
   // that extends your base repository and reuse on methods of class
   public _table?: Table<any, IndexableType> | undefined;
@@ -13,12 +12,12 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
     this._table = table;
   }
 
-  async create(item: T): Promise<boolean> {
-    const i = item as unknown as IndexableType;
+  async create(item: S): Promise<boolean> {
     await this._table
-      ?.add(i)
+      //?.add(item.getData())
+      ?.add(item)
       .then((result) => {
-        console.log(`Adding item:${JSON.stringify(i)} to database`);
+        //console.log(`Adding item:${JSON.stringify(i)} to database`);
         return true;
       })
       .catch((error) => {
@@ -29,7 +28,7 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
     return true;
   }
 
-  async update(id: string, item: T): Promise<boolean> {
+  async update(id: string, item: S): Promise<boolean> {
     const i = item as unknown as IndexableType;
     this._table?.put(id, i).then((result) => {
       return true;
@@ -45,8 +44,8 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
     return false;
   }
 
-  async find(item: T): Promise<T[]> {
-    var result = new Array<T>();
+  async find(item: S): Promise<S[]> {
+    var result = new Array<S>();
     const i = item as unknown as IndexableType;
     await this._table
       ?.where("id")
@@ -57,7 +56,7 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
     return result;
   }
 
-  async findOne(id: number): Promise<T> {
+  async findOne(id: number): Promise<S> {
     let result = await this._table?.where("id").equals(id).first();
     console.log(result);
     return result;
@@ -72,3 +71,7 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
     return usedIds;
   }
 }
+function ITag(ITag: any) {
+  throw new Error("Function not implemented.");
+}
+

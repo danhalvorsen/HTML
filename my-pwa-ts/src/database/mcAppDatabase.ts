@@ -1,5 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import { TagIndexes } from './TagIndex';
+import { ChecklistDetailsIndexes, TagIndexes } from './Index';
 // import TagIndex  from './TagIndex';
 
 /* ---- Optimized index objects for database ---- */
@@ -11,13 +11,16 @@ export default class SomethingDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   // mcPkgPreview!: Table<KeyMcPkgPreview>;
-  tag!:Table<TagIndexes>;
-
+  tags!:Table<TagIndexes>;
+  checklistDetails!:Table<ChecklistDetailsIndexes>;
+  
   constructor() {
     super('mcAppDatabase');
     this.version(1).stores({
-      tag: 'id, tagNo, commPkgNo, mcPkgNo',
+      tags: "tag.id, tag.tagNo, tag.commPkgNo, tag.mcPkgNo",
+      checklistDetails: "id, tagId, mcPkgNo"
     });
+    
   }
 }
 

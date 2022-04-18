@@ -3,30 +3,13 @@
 
 ```mermaid
 classDiagram 
-  SimpleIndexType --|> IBaseIndex
+  DomainObject <|-- ChecklistDetails 
+  DomainObject <|-- Tag
+
+  DomainObject : +any data
+
 ```
 
-# TagIndex
-
-```mermaid
-classDiagram 
-  IBaseIndex --* TagIndex
-  TagKeysTypes --* TagIndex
-```
-
-```mermaid
-classDiagram 
-  IBaseIndex --* McPktIndex
-  McPktKeyTypes --* McPktIndex
-```
-
-# Tag
-
-```mermaid
-classDiagram 
-  TagIndex <|-- Tag 
-  ITag <|-- Tag 
-  
-```
+ 
       
             
