@@ -1,12 +1,12 @@
+
 import { ReservedIds } from './../../my-pwa-ts/src/mockRoutes/faker';
 import * as _ from 'lodash';
 import { Console } from "./console";
 var equal = require('deep-equal');
-import { FakerTag, FakerTagWithIdCheck } from '../../my-pwa-ts/src/mockRoutes/faker';
+import { FakerTagWithIdCheck } from '../../my-pwa-ts/src/mockRoutes/faker';
 import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
-import { TagIndexes } from '../../my-pwa-ts/src/database/TagIndex';
 import {db } from '../../my-pwa-ts/src/database/mcAppDatabase';
-import { ITag } from '../../my-pwa-ts/src/mockRoutes/api.types';
+import { Tag } from '../../my-pwa-ts/src/database/Tag';
 
 db.open().catch(function (err) {
     console.error('Failed to open db: ' + (err.stack || err));
@@ -50,30 +50,22 @@ const r : ReservedIds = {
 };
 
 const fakeTag = FakerTagWithIdCheck(r);
-var obj1 = createTagIndexes(fakeTag);
-await repository.create(obj1);
+await repository.create(new Tag(fakeTag));
 
- 
 
 const lookupTag = await repository.findOne(fakeTag.tag.id);
-console.log(`The deep test fails due to different objects: ${equal(lookupTag, fakeTag.tag)}`);
+if(lookupTag !== undefined || lookupTag !== null)
+{
+    console.log(`The deep test fails due to different objects: ${equal(lookupTag, fakeTag.tag)}`);
+}
+else
+{
+    console.log("Error finding tag");
+}
+
+
 
 console.log(`FakeTag:${JSON.stringify(fakeTag)}`);
 // const castedTag = lookupTag[0] as Tag;
 // console.log(`The test was: ${castedTag.equals(fakeTag)}`);
 console.log("====================================================================\n");
-
-
-  
-function createTagIndexes(fakeData : ITag) : TagIndexes {
-    
-    const obj : TagIndexes = {
-        id: fakeTag.tag.id, 
-        tagNo: fakeTag.tag.tagNo,
-        commPkgNo: fakeTag.tag.commPkgNo,
-        mcPkgNo: fakeTag.tag.mcPkgNo,
-        additionalFields: fakeTag.additionalFields
-    };
-
-    return obj;
-}
