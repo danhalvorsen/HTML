@@ -13,8 +13,8 @@ export abstract class BaseRepository<S, T extends DomainObject<S>> implements IW
   }
 
   async create(item: S): Promise<boolean> {
+    console.log("create");
     await this._table
-      //?.add(item.getData())
       ?.add(item)
       .then((result) => {
         //console.log(`Adding item:${JSON.stringify(i)} to database`);
@@ -45,6 +45,7 @@ export abstract class BaseRepository<S, T extends DomainObject<S>> implements IW
   }
 
   async find(item: S): Promise<S[]> {
+    console.log('find');
     var result = new Array<S>();
     const i = item as unknown as IndexableType;
     await this._table
@@ -57,7 +58,8 @@ export abstract class BaseRepository<S, T extends DomainObject<S>> implements IW
   }
 
   async findOne(id: number): Promise<S> {
-    let result = await this._table?.where("id").equals(id).first();
+    console.log('findOne');
+    let result = await this._table?.where("tag.id").equals(id).first();
     console.log(result);
     return result;
   }

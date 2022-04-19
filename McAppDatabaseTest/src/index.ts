@@ -8,7 +8,7 @@ import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/
 import {db } from '../../my-pwa-ts/src/database/mcAppDatabase';
 import { Tag } from '../../my-pwa-ts/src/database/Tag';
 
-await db.open()
+db.open()
 .catch(function (err) {
     console.error('Failed to open db: ' + (err.stack || err));
 });
@@ -51,7 +51,7 @@ const r : ReservedIds = {
 };
 
 const fakeTag = FakerTagWithIdCheck(r);
-console.log(``)
+
 await repository.create(new Tag(fakeTag).data());
 
 
