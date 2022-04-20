@@ -678,7 +678,7 @@ export const FakerTagWithIdCheck = (fn:ReservedIds): ITag => {
 export const FakerTag = (): ITag => {
     return {
         tag: FakerTagDetails(),
-        additionalFields: AdditionalTagFields(faker.datatype.number({ min: 0, max: 20 }))
+        additionalFields: AdditionalTagFields(faker.datatype.number({ min: 2, max: 20 }))
     }
 }
 

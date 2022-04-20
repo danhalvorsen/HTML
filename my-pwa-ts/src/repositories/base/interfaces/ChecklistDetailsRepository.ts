@@ -1,9 +1,8 @@
 import { db } from "../../../database/mcAppDatabase";
-import { BaseRepository } from "./baseRepository";
 import { IChecklistDetails } from "../../../mockRoutes/api.types";
-import { ChecklistDetails } from "../../../database/ChecklistDetails";
+import { BaseRepository } from "./Repository";
 
-export class ChecklistDetailsRepository extends BaseRepository<IChecklistDetails, ChecklistDetails> {
+export class ChecklistDetailsRepository extends BaseRepository<IChecklistDetails> {
     constructor() {
       var table = db.tables.find((t) => t.name === "checklistDetails");
       console.log(`Database:${db.name} is: ${db.isOpen() ? "open" : "closed"}`);

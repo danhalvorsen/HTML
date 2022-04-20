@@ -8,9 +8,8 @@ import { ChecklistDetailsIndexes, TagIndexes } from './Index';
 //   {additionalFields: Pick<IAdditionalTagField, 'id'|'label'>[]}
 
 export default class SomethingDexie extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
-  // mcPkgPreview!: Table<KeyMcPkgPreview>;
+
+  public readonly dbName : string = 'mcAppDatabase'
   tags!:Table<TagIndexes>;
   checklistDetails!:Table<ChecklistDetailsIndexes>;
   

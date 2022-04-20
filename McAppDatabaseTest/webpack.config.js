@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  //entry: './src/index.ts',
   entry: {
     source: './src/index.ts',
     tests: './src/specs/testMe.ts',

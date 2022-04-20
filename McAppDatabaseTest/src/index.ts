@@ -7,6 +7,7 @@ import { FakerTagWithIdCheck } from '../../my-pwa-ts/src/mockRoutes/faker';
 import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
 import {db } from '../../my-pwa-ts/src/database/mcAppDatabase';
 import { Tag } from '../../my-pwa-ts/src/database/Tag';
+import { QueryFilter } from '../../my-pwa-ts/src/repositories/base/interfaces/QueryFilter';
 
 db.open()
 .catch(function (err) {
@@ -54,8 +55,12 @@ const fakeTag = FakerTagWithIdCheck(r);
 
 await repository.create(new Tag(fakeTag).data());
 
+let filter : QueryFilter = {
+    id: "tag.id",
+    value: fakeTag.tag.id
+  };
 
-const lookupTag = await repository.findOne(fakeTag.tag.id);
+const lookupTag = await repository.findOne(filter);
 if(lookupTag !== undefined || lookupTag !== null)
 {
     console.log(`The deep test fails due to different objects: ${equal(lookupTag, fakeTag.tag)}`);

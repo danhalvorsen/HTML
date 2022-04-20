@@ -1,5 +1,5 @@
-
+import { QueryFilter } from './QueryFilter';
 export interface IRead<T> {
-    find(item: T): Promise<T[]> | undefined;
-    findOne(id: number): Promise<T> | undefined;
+    find(filter: QueryFilter): Promise<T[]> | undefined;
+    findOne(filter: QueryFilter): Promise<T> | undefined;
 }
