@@ -2,6 +2,9 @@ export interface IEntityFilter {
     build(): string;
 }
 
+const mergeSubObject = <S, K extends keyof S>(originalObject: S, changes: Pick<S, K>): S =>
+  Object.assign({}, originalObject, changes);
+
 export class EntityFilter implements IEntityFilter {
 
     public filterResult: { readonly [key: string]: string } = {};
@@ -16,26 +19,41 @@ export class TagReadFilter extends EntityFilter {
     }
 
     setTagPath(tagPath: string) {
-        return new TagReadFilter({ ...this.filterResult, tagPath:tagPath ? `${tagPath}` : undefined });
+        return new TagReadFilter({
+            ...this.filterResult, 
+            tagPath:tagPath 
+            ? `${tagPath}` : undefined 
+        });
     }
 
     setTagId(id: string) {
-        return new TagReadFilter({ ...this.filterResult, tagId:id ? `${id}` : undefined });
+        return new TagReadFilter({
+            ...this.filterResult, 
+            tagId:id 
+            ? `${id}` : undefined 
+        });
+    }
+ 
+    setTagNo(tagNo: string) {
+        return new TagReadFilter({...this.filterResult, TagNo: tagNo ? `${tagNo}` : undefined });
     }
 
-    /* Mainly used for testing purposes */
-    setExceptedTagId(expected_tagId: string) {
-        return new TagReadFilter({ ...this.filterResult, expected_tagId: expected_tagId ? `${expected_tagId}` : undefined });
+    setCommPkgNo(commPkgNo: string) {
+        return new TagReadFilter({...this.filterResult, CommPkgNo: commPkgNo ? `${commPkgNo}` : undefined });
     }
 
+    setMcPkgNo(mcPkgNo : string) {
+        return new TagReadFilter({...this.filterResult, McPkgNo: mcPkgNo ? `${mcPkgNo}` : undefined });
+    }
 
+   
 
     override build(): string {
         const filters = Object.values(this.filterResult).filter(Boolean);
         return filters?.length > 0 ? filters.join(` and `) : '';
     }
 
-    getFilterByProp(prop: string) {
+    getFilterByProp(prop: string) : string {
 
         return this.filterResult[prop];
     }
