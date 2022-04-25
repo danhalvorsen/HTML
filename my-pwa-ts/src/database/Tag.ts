@@ -1,24 +1,14 @@
-/************* Domain object ****************************************/
+import { IAdditionalTagField, ITag, ITagDetails } from "../mockRoutes/api.types";
+export class Tag implements ITag {
 
-import { ITag } from "../mockRoutes/api.types";
-import { DomainObject } from "./DomainObject";
-
-/* Objects that falls into this  category is mainly used as entity in 
-the database. The domain objects implements the type definition IFoo. 
-The domain object should be the location for front-end business rules. 
-(Front-end Biz.rules should normally be executed in the backend domain, and we will not 
-challenge that within the new offline feature) */
-export class Tag implements DomainObject<ITag> {
-   _data: ITag;
+  tag: ITagDetails;
+  additionalFields: IAdditionalTagField[];
 
   public constructor(data: ITag) {
-    this._data = data;
+    this.tag = data.tag,
+      this.additionalFields = data.additionalFields;
   }
 
-  data() : ITag {
-    return this._data;
-  }
- 
   log() {
     console.log(JSON.stringify(this));
   }

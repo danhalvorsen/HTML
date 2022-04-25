@@ -1,4 +1,4 @@
-    import { TagReadFilter } from './../../my-pwa-ts/src/repositories/base/interfaces/filter/EntityFilter';
+import { TagReadFilter } from './../../my-pwa-ts/src/repositories/base/interfaces/filter/EntityFilter';
 
 import { ReservedIds } from './../../my-pwa-ts/src/mockRoutes/faker';
 import * as _ from 'lodash';
@@ -12,17 +12,17 @@ import { QueryFilter } from '../../my-pwa-ts/src/repositories/base/interfaces/Qu
 
 
 let tagFilter = new TagReadFilter();
-    tagFilter = 
+tagFilter =
     tagFilter
-    .setTagPath("tag.Id")
-    .setTagId("1000")
-    .setTagNo("1000-1000")
-    .setCommPkgNo("2000-2222")
-    
+        .setTagPath("tag.Id")
+        .setTagId("1000")
+        .setTagNo("1000-1000")
+        .setCommPkgNo("2000-2222")
 
-    var byProp1 = tagFilter.getFilterByProp("tagId");
-    var byProp2 = tagFilter.getFilterByProp("Dummy");
-    let query = tagFilter.build();
+
+var byProp1 = tagFilter.getFilterByProp("tagId");
+var byProp2 = tagFilter.getFilterByProp("Dummy");
+let query = tagFilter.build();
 
 
 db.open()
@@ -68,7 +68,7 @@ const r: ReservedIds = {
 
 const fakeTag = FakerTagWithIdCheck(r);
 
-await repository.create(new Tag(fakeTag).data());
+await repository.create(new Tag(fakeTag));
 
 let filter: QueryFilter = {
     id: "tag.id",
