@@ -1,4 +1,4 @@
-    import { TagReadFilter } from './../../my-pwa-ts/src/repositories/base/interfaces/filter/EntityFilter';
+import { TagReadFilter } from './../../my-pwa-ts/src/repositories/base/interfaces/filter/EntityFilter';
 
 import { ReservedIds } from './../../my-pwa-ts/src/mockRoutes/faker';
 import * as _ from 'lodash';
@@ -12,7 +12,7 @@ import { db } from '../../my-pwa-ts/src/database/SomethingDexie';
 
 
 let tagFilter = new TagReadFilter();
-    tagFilter = 
+tagFilter =
     tagFilter
     .setTagPath("tag.Id")
     .setTagId("1000")
@@ -20,9 +20,10 @@ let tagFilter = new TagReadFilter();
     .setCommPkgNo("2000-2222")
 
 
-    var byProp1 = tagFilter.getFilterByProp("tagId");
-    var byProp2 = tagFilter.getFilterByProp("Dummy");
-    let query = tagFilter.build();
+
+var byProp1 = tagFilter.getFilterByProp("tagId");
+var byProp2 = tagFilter.getFilterByProp("Dummy");
+let query = tagFilter.build();
 
 
 db.open()
