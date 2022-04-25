@@ -1,5 +1,5 @@
-import {  PickRandomFromList } from '../../../mockRoutes/faker';
-import { StatusCodes, TagFunctionCodes } from '../../../mockRoutes/fakerDataLists';
+import {  PickRandomFromList } from '../../../mockRoutes/Faker';
+import { StatusCodes, TagFunctionCodes } from '../../../mockRoutes/FakerDataLists';
 
 describe('Pick randomly from a list', () => {
     it('should pick status code item from codes', ()=> {

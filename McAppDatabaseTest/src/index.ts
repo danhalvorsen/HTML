@@ -1,12 +1,10 @@
-import { TagReadFilter } from './../../my-pwa-ts/src/repositories/base/interfaces/filter/EntityFilter';
-
-import { ReservedIds } from './../../my-pwa-ts/src/mockRoutes/faker';
 import * as _ from 'lodash';
 import { Console } from "./console";
 var equal = require('deep-equal');
+import { TagReadFilter } from './../../my-pwa-ts/src/repositories/base/interfaces/filter/EntityFilter';
+import { ReservedIds } from '../../my-pwa-ts/src/mockRoutes/faker';
 import { FakerTagWithIdCheck } from '../../my-pwa-ts/src/mockRoutes/faker';
 import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
-import { Tag } from '../../my-pwa-ts/src/database/Tag';
 import { QueryFilter } from '../../my-pwa-ts/src/repositories/base/interfaces/QueryFilter';
 import { db } from '../../my-pwa-ts/src/database/SomethingDexie';
 

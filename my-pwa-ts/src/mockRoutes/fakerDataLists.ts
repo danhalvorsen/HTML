@@ -1,6 +1,7 @@
 import { ColumnLabel, ICheckItem, Row } from "./api.types";
 import { FakerCheckItem, FakerColumnLabel, FakeRow } from "./faker";
 
+
 function Rows(): Array<Row> {
     let options = new Array<Row>();
     options.push(FakeRow());

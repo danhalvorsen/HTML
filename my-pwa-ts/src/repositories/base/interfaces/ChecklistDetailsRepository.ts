@@ -1,18 +1,12 @@
-import { ChecklistDetailsIndexes } from "../../../database/Index";
+import { ChecklistDetails } from "../../../database/ChecklistDetails";
 import { db } from "../../../database/mcAppDatabase";
-import { IChecklistDetails } from "../../../mockRoutes/api.types";
-import { BaseRepository } from "./Repository";
 
 export class ChecklistDetailsRepository {
-// extends BaseRepository<IChecklistDetails> {
-    constructor() {
-      
-    }
+// extends BaseRepository<IChecklistDetails> 
+    async getById(id : number) : Promise<ChecklistDetails> {
 
-    async getById(id : number) : IChecklistDetails {
-        var result = await db.checklistDetails.where('id').equals(id).first();
-        
+        let result =  await db.checklistDetails.where('id').equals(id).first();
+        return result as ChecklistDetails;
 
     }
-
   }

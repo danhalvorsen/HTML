@@ -1,9 +1,8 @@
 import 'chai/register-should';
 import { TagRepository } from '../../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
-import { FakerTag } from '../../../my-pwa-ts/src/mockRoutes/faker';
-
 import { QueryFilter } from '../../../my-pwa-ts/src/repositories/base/interfaces/QueryFilter';
 import { db } from '../../../my-pwa-ts/src/database/SomethingDexie';
+import { FakerTag } from '../../../my-pwa-ts/src/mockRoutes/faker';
 
 export const Foo = async(id : number) => {
 

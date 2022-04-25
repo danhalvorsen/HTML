@@ -1,5 +1,5 @@
-import {FindSubPatterns } from '../../../mockRoutes/findSubPatterns'
-import {FakerSyntax} from '../../../mockRoutes/fakerSyntax'
+import {FindSubPatterns } from '../../../mockRoutes/FindSubPatterns'
+import {FakerSyntax} from '../../../mockRoutes/FakerSyntax'
 
 describe('discover sub patterns in string', () => {
     it('one Pattern in XX', () => {

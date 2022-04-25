@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { IMcPkgPreview, ITagPreview } from '../../mockRoutes/api.types';
-import { server } from '../../mockRoutes/server';
+import { server } from '../../mockRoutes/Server';
 
 describe('McPkg test suite', () => {
 

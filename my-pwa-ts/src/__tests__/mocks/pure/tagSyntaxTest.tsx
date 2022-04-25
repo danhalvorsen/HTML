@@ -1,4 +1,4 @@
-import { FakerTag, TagSyntaxRegex } from '../../../mockRoutes/faker';
+import { FakerTag, TagSyntaxRegex } from '../../../mockRoutes/Faker';
 
 describe('A Tag should have a spesfic syntax', () => {
     it('should have a specific syntax', ()=> {

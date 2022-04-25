@@ -4,8 +4,7 @@ module.exports = {
   entry: {
     source: './src/index.ts',
     tests: ['./src/specs/repository.using.builder.pattern.test.ts',
-            './src/specs/testMe.ts',
-            './src/ChecklistDetailsWithTag.test.ts']
+            './src/specs/testMe.ts']
   },
   devtool: 'inline-source-map',
   module: {
