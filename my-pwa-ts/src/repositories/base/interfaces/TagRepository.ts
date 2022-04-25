@@ -1,4 +1,4 @@
-import { db } from "../../../database/mcAppDatabase";
+import { db } from "../../../database/SomethingDexie";
 import { ITag } from "../../../mockRoutes/api.types";
 import { BaseRepository } from "./Repository";
 

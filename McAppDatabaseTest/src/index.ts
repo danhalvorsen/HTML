@@ -6,9 +6,9 @@ import { Console } from "./console";
 var equal = require('deep-equal');
 import { FakerTagWithIdCheck } from '../../my-pwa-ts/src/mockRoutes/faker';
 import { TagRepository } from '../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
-import { db } from '../../my-pwa-ts/src/database/mcAppDatabase';
 import { Tag } from '../../my-pwa-ts/src/database/Tag';
 import { QueryFilter } from '../../my-pwa-ts/src/repositories/base/interfaces/QueryFilter';
+import { db } from '../../my-pwa-ts/src/database/SomethingDexie';
 
 
 let tagFilter = new TagReadFilter();
@@ -18,7 +18,7 @@ let tagFilter = new TagReadFilter();
     .setTagId("1000")
     .setTagNo("1000-1000")
     .setCommPkgNo("2000-2222")
-    
+
 
     var byProp1 = tagFilter.getFilterByProp("tagId");
     var byProp2 = tagFilter.getFilterByProp("Dummy");
@@ -68,7 +68,7 @@ const r: ReservedIds = {
 
 const fakeTag = FakerTagWithIdCheck(r);
 
-await repository.create(new Tag(fakeTag).data());
+await repository.create(fakeTag);
 
 let filter: QueryFilter = {
     id: "tag.id",

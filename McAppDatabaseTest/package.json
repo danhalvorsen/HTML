@@ -22,7 +22,7 @@
   "dependencies": {
     "chai": "^4.3.6",
     "deep-equal": "^2.0.5",
-    "dexie-relationships": "^1.2.11",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "unexposed": "^1.0.0"
   }
 }

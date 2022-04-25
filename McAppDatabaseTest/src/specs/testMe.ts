@@ -1,11 +1,20 @@
 import 'chai/register-should';
 import { TagRepository } from '../../../my-pwa-ts/src/repositories/base/interfaces/tagRepository';
-import { FakerTag } from './../../../my-pwa-ts/src/mockRoutes/faker';
-import { db } from '../../../my-pwa-ts/src/database/mcAppDatabase';
+import { FakerTag } from '../../../my-pwa-ts/src/mockRoutes/faker';
+
 import { QueryFilter } from '../../../my-pwa-ts/src/repositories/base/interfaces/QueryFilter';
+import { db } from '../../../my-pwa-ts/src/database/SomethingDexie';
 
+export const Foo = async(id : number) => {
 
-describe('Tag', () => {
+  var usedIds: Array<number> = [];
+  await db.tags.each((item) => {
+      usedIds.push(item.tag.id);
+    });
+    return usedIds;
+};
+
+describe('TestMe - Tag', () => {
   
   var fakeTag = FakerTag();
   var tagRepository = new TagRepository();
@@ -36,9 +45,5 @@ describe('Tag', () => {
 
     let searchResult = await tagRepository.find(filter);
     searchResult.should.be.an('array'); 
-    
   });
-
-    
-   
 });

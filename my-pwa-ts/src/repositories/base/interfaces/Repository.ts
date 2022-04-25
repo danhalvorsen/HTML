@@ -1,3 +1,4 @@
+import { db } from './../../../db';
 import { IWrite } from "./IWrite";
 import { IRead } from "./IRead";
 import { IndexableType, Table } from "dexie";
@@ -26,6 +27,7 @@ export abstract class BaseRepository<S> implements IWrite<S>, IRead<S> {
 
     return true;
   }
+
 
   async update(id: string, item: S): Promise<boolean> {
     const i = item as unknown as IndexableType;
@@ -64,6 +66,8 @@ export abstract class BaseRepository<S> implements IWrite<S>, IRead<S> {
     console.log(result);
     return result;
   }
+
+ 
 
   async getUsedIds(): Promise<Array<number>> {
     var usedIds: Array<number> = [];
