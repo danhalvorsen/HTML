@@ -2,9 +2,15 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    source: './src/index.ts',
-    tests: ['./src/specs/repository.using.builder.pattern.test.ts',
-            './src/specs/testMe.ts']
+    source: './src/index.ts', 
+    tests: [
+            './src/specs/repository.using.builder.pattern.test.ts',
+            './src/specs/testMe.ts',
+            './src/specs/ChecklistDetailsWithTag.test.ts']
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'inline-source-map',
   module: {
@@ -19,10 +25,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+  
   mode: "development",
   watch: true,
   watchOptions: {

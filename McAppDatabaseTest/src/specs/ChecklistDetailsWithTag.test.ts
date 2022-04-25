@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import "chai/register-should";
 
 describe('query for IChecklistDetails and combine tagId with corresponding ITag',  () => {
@@ -5,6 +6,6 @@ describe('query for IChecklistDetails and combine tagId with corresponding ITag'
         true.should.be.true;
     })
     it('test 2', () => {
-        true.should.be.true;
+        expect(true).to.be.true;
     })
 });

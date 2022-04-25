@@ -1,7 +1,7 @@
 {
   "name": "indexedDbTest",
   "version": "1.0.0",
-  "description": "[Dixie typescript database in action](//https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack"
