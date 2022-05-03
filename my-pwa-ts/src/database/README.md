@@ -37,10 +37,15 @@ gantt
 
 
     section Main API
-    Add API for fetching offline scope  :a1, 12d
+    Create offline scope : a1, 4d
+    Add API for GET offline scope  :a1, 12d
+    
     another task                        :after a1, 4d
     
     section PCS MAIN
-    UI for creating offline scope      :pcs1, 12d
+    UI offline scope (Select MCPkg with disciplineCode)      :pcs1, 12d
+    Save to database      :pcs1, 4d
+
+
 
 ```
