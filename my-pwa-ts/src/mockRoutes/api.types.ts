@@ -1,3 +1,4 @@
+import { IndexableType } from 'dexie';
 import { ResponseComposition } from 'msw';
 
 export enum CompletionStatus {
